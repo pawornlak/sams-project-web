@@ -335,6 +335,10 @@
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
+  
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Page-Card-Members-Close {
