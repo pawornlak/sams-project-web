@@ -374,7 +374,7 @@ return (
             <div key={prod.name} className="row Attend-Div">
                 <div className="col-8 Attend-Name">{id + 1 + '. '}{prod.name}</div>
                 {/* <Button variant={btnGreen.color} onClick={handleRedClick(prod._id)}>เข้าร่วม</Button>{' '} */}
-                <ToggleButtonGroup className="Attend-Btn" type="checkbox" value={value} onChange={handleChange}>
+                <ToggleButtonGroup className="Attend-Btn Dis-In" type="checkbox" value={value} onChange={handleChange}>
                     <ToggleButton variant="outline-info" value={id} onClick={e => { setVId(id) }}>{showW[id] == false ? "เช็คชื่อแล้ว" : "เช็คชื่อ"}</ToggleButton>
                 </ToggleButtonGroup>
 
