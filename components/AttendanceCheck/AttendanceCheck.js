@@ -59,7 +59,7 @@ const AttendanceCheck = () => {
             ]
         }
     );
-    console.log('btn: '+btnGreen)
+    console.log('btn: ' + btnGreen)
     const [btnRed, setbtnRed] = useState({
         color: 'danger',
         data: ''
@@ -70,6 +70,7 @@ const AttendanceCheck = () => {
     })
 
     const [checkjoined, setcheckjoined] = useState(false)
+
     // const [active, setActive] = useState(true);
     const [word, setWord] = useState("")
 
@@ -210,7 +211,7 @@ const AttendanceCheck = () => {
                     console.log(value)
                 }
                 else {
-                    setcheckjoined(true)
+                    setcheckjoined(false)
                 }
 
             }
@@ -371,34 +372,33 @@ const AttendanceCheck = () => {
     //     }
     // }
     if (error) return <p>Something went wrong, please try again.</p>;
-    if (loading) return <p>Loading ...</p>;
+    if (loading) return <div className="d-flex justify-content-center"><div class="spinner-border text-info" role="status"> <span class="sr-only">Loading...</span> </div></div>;
 
 
 
     return (
-
         <div className="container">
-            {checkjoined && <div>
-                {data.getOnePost.joinUsers.map((prod, id) => (
-                    <div key={prod.name} className="row Attend-Div">
-                        <div className="col-8 Attend-Name">{id + 1 + '. '}{prod.name}</div>
-                        {/* <Button variant={btnGreen.color} onClick={handleRedClick(prod._id)}>เข้าร่วม</Button>{' '} */}
-                        <ToggleButtonGroup className="Attend-Btn" type="checkbox" value={value} onChange={handleChange}>
-                            <ToggleButton variant="outline-info" value={id} onClick={e => { setVId(id) }}>{showW[id] == false ? "เช็คชื่อแล้ว" : "เช็คชื่อ"}</ToggleButton>
-                        </ToggleButtonGroup>
+            {checkjoined == true? (
+                <div>
+                    {data.getOnePost.joinUsers.map((prod, id) => (
+                        <div key={prod.name} className="row Attend-Div">
+                            <div className="col-8 Attend-Name">{id + 1 + '. '}{prod.name}</div>
+                            <ToggleButtonGroup className="Attend-Btn" type="checkbox" value={value} onChange={handleChange}>
+                                <ToggleButton variant="outline-info" value={id} onClick={e => { setVId(id) }}>{showW[id] == false ? "เช็คชื่อแล้ว" : "เช็คชื่อ"}</ToggleButton>
+                            </ToggleButtonGroup>
+                        </div>
+                    ))}
 
-                        {/* <Button variant={btnGreen.color} key={prod.name} name={prod.name} value={prod.name} onClick={handleRedClick}>Success</Button>{' '} */}
-                        {/* {btnGreen.datac[id].btnactive == true ? "success" : "outline-seccess"} */}
-                        {/* {btnGreen.true ? "success" : "outline-seccess"} */}
-                        {/* {show[id] == true ? "เช็คชื่อ" : "เช็คชื่อแล้ว"} */}
+                    <div className="d-flex flex-row-reverse">
+                        <Button className="Attend-Submit" variant="success" onClick={submitBtn}>บันทึก</Button>
                     </div>
-                ))}
-            </div>}
-            <div className="d-flex flex-row-reverse">
-                <Button className="Attend-Submit" variant="success" onClick={submitBtn}>บันทึก</Button>
-            </div>
-
-            {/* {data.getOnePost.joinUsers[0].name} */}
+                </div>) :
+                (
+                    <div>
+                        <p>ยังไม่มีผู้เข้าร่วมกิจกรรมนี้</p>
+                    </div>
+                )
+            }
         </div>
     );
 };

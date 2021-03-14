@@ -712,15 +712,16 @@ const ActivityInfo = () => {
                       </Link>
                     </div>
                     <div>
-                      <Link
+                      {/* <Link
                         key="attendanceCheck"
                         href="/attendanceCheck/[activityId]"
                         as={`/attendanceCheck/${postId}`}
-                      >
-                        <button className="Activity-Info-Page-Card-Button-Check">
-                          เช็คชื่อ
+                      > */}
+                      <button className="Activity-Info-Page-Card-Button-Check"
+                        onClick={handleShowAttendance}>
+                        เช็คชื่อ
                         </button>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                     <div>
                       {" "}
@@ -790,11 +791,6 @@ const ActivityInfo = () => {
           </div>
         </div>
       </div>
-      {/* <div
-        show={showAttendance}
-        onHide={handleCloseAttendance}>
-        <AttendanceCheck />
-      </div> */}
       <div>
         <Modal
           show={showModalSendEmail}
@@ -913,9 +909,8 @@ const ActivityInfo = () => {
               variant="btn btn-outline-danger"
               onClick={handleCloseAttendance}
             >
-              ปิด
             </Button> 
-          </Modal.Footer>*/}
+          </Modal.Footer> */}
         </Modal>
       </div>
       <div>
@@ -1021,7 +1016,6 @@ const ActivityInfo = () => {
           </Modal.Footer>
         </Modal>
       </div>
-      {/* {showAttendance && <AttendanceCheck/>} */}
     </div>
   );
 };
