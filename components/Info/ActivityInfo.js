@@ -870,7 +870,7 @@ const ActivityInfo = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>เช็คชื่อผู้เข้าร่วมกิจกรรม</Modal.Title>
+            <Modal.Title>เข้าร่วมกิจกรรม</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             ชื่อกิจกรรม : {data.getOnePost.name}
