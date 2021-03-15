@@ -372,7 +372,7 @@ const AttendanceCheck = () => {
     //     }
     // }
     if (error) return <p>Something went wrong, please try again.</p>;
-    if (loading) return <div className="d-flex justify-content-center"><div class="spinner-border text-info" role="status"> <span class="sr-only">Loading...</span> </div></div>;
+    if (loading) return <div className="d-flex justify-content-center"><div class="spinner-border text-info" role="status"> <span class="sr-only"></span> </div></div>;
 
 
 
@@ -383,7 +383,7 @@ const AttendanceCheck = () => {
                     {data.getOnePost.joinUsers.map((prod, id) => (
                         <div key={prod.name} className="row Attend-Div">
                             <div className="col-8 Attend-Name">{id + 1 + '. '}{prod.name}</div>
-                            <ToggleButtonGroup className="Attend-Btn" type="checkbox" value={value} onChange={handleChange}>
+                            <ToggleButtonGroup className="Attend-Btn Dis-In" type="checkbox" value={value} onChange={handleChange}>
                                 <ToggleButton variant="outline-info" value={id} onClick={e => { setVId(id) }}>{showW[id] == false ? "เช็คชื่อแล้ว" : "เช็คชื่อ"}</ToggleButton>
                             </ToggleButtonGroup>
                         </div>

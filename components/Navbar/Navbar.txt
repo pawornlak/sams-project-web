@@ -1,0 +1,309 @@
+import React, { useEffect, useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
+import Router from "next/router";
+import MenuItems from "./MenuItem";
+import User from "../../Image/user.png";
+import Logo from "../../Image/logo.png";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+import { usePath } from "hookrouter";
+import { AuthContext } from "../../appState/AuthProvider";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+export const QUERY_USERPROFILE = gql`
+  query {
+    getOneUser {
+      name
+      studentId
+      major
+      type
+    }
+  }
+`;
+
+const navbar = () => {
+  //console.log("Menu", MenuItems);
+  const [toggle, setToggle] = useState("");
+  const [refresh, setRefresh] = useState(false);
+
+  const path = usePath();
+
+  const { user, signout } = useContext(AuthContext);
+  console.log("User Navbar", user);
+
+  const [isAdmin, setisAdmin] = useState(false);
+  console.log("Admin >>", isAdmin);
+
+  const [isShown, setIsShown] = useState(false);
+  const handleIsShown = async () => {
+    if (isShown == false) {
+      setIsShown(true);
+    }
+    if (isShown == true) {
+      setIsShown(false);
+    }
+  };
+
+  console.log("toggle nav", toggle);
+
+  return (
+    <div className="Nav-Items-Div">
+      <nav className="Nav-Items Nav-Items-Flex">
+        <div className="Nav-Logo-Flex">
+          <img
+            className="Nav-Logo-Img"
+            src={Logo}
+            onClick={() => Router.push("/")}
+          />
+          {/* <h1
+            className="Nav-Logo"
+            href="#"
+            onClick={() => Router.push("/main")}
+          >
+            กิจกรรมนักศึกษา
+          </h1> */}
+        </div>
+        <div className="Nav-Elements-Flex">
+          <div className="Nav-Elements">
+            <li>
+              <a
+                className={toggle == "main" ? "Nav-Home" : "Nav-Home-Trans"}
+                //onClick={() => handleClick("main")}
+                onClick={() => Router.push("/")}
+              >
+                หน้าแรก
+              </a>
+            </li>
+            <li>
+              <a
+                className={
+                  toggle == "activity"
+                    ? "Nav-Activities"
+                    : "Nav-Activities-Trans"
+                }
+                //onClick={() => handleClick("activity")}
+                onClick={() => Router.push("/activity")}
+              >
+                กิจกรรมทั้งหมด
+              </a>
+            </li>
+            {user && (
+              <>
+                <li>
+                  <a
+                    className={
+                      toggle == "create"
+                        ? "Nav-Activities"
+                        : "Nav-Activities-Trans"
+                    }
+                    //onClick={() => handleClick("activity")}
+                    onClick={() => Router.push("/post")}
+                  >
+                    สร้างกิจกรรม
+                  </a>
+                </li>
+              </>
+            )}
+            {/* {user.type == "admin" &&(
+              <>
+              <li>
+                <a
+                  className={
+                    toggle == "create"
+                      ? "Nav-Activities"
+                      : "Nav-Activities-Trans"
+                  }
+                  //onClick={() => handleClick("activity")}
+                  onClick={() => Router.push("/reportView")}
+                >
+                  การรายงาน
+                </a>
+              </li>
+            </>
+            )} */}
+          </div>
+        </div>
+        {user && (
+          <>
+            <div className="Nav-Profile-Flex">
+              <img
+                className="Nav-Profile-Img"
+                src={User}
+                //onClick={() => handleClick("")}
+                onClick={() => Router.push("/profile")}
+              />
+              <div className="Nav-Profile-Flex-Text">
+                <div class="dropdown">
+                  <button
+                    class="dropbtn"
+                    onClick={() => Router.push("/profile")}
+                  >
+                    {user.studentId}
+                    {user.type == "admin" && <>{user.name}</>}
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <a href="#">
+                      <p
+                        className="Nav-Profile-Username"
+                        onClick={() => Router.push("/profile")}
+                      >
+                        โปรไฟล์
+                      </p>
+                    </a>
+                    {user.type == "admin" && (
+                      <>
+                        <a href="#">
+                          <p
+                            className="Nav-Profile-Report"
+                            onClick={() => Router.push("/reportView")}
+                          >
+                            การรายงาน
+                          </p>
+                        </a>
+                      </>
+                    )}
+                    <a href="#">
+                      <p className="Nav-Profile-Logout" onClick={signout}>
+                        ออกจากระบบ
+                      </p>
+                    </a>
+                  </div>
+                </div>
+                {/* <label
+                  className="Nav-Profile-Username"
+                  onClick={() => Router.push("/profile")}
+                >
+                  {user.studentId}
+                  {user.type == "admin" && <>{user.name}</>}
+                </label> */}
+                {/* {user.type == "admin" && (
+                  <>
+                    <p
+                      className="Nav-Profile-Report" //onClick={() => handleClick("activity")}
+                      onClick={() => Router.push("/reportView")}
+                    >
+                      การรายงาน
+                    </p>
+                  </>
+                )} */}
+                {/* <label className="Nav-Profile-Logout" onClick={signout}>
+                  LOGOUT
+                </label> */}
+              </div>
+              {/* <div class="dropdown">
+                <button class="dropbtn">
+                  {user.studentId}
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#">
+                    <label
+                      className="Nav-Profile-Username"
+                      onClick={() => Router.push("/profile")}
+                    >
+                      {user.studentId}
+                    </label>
+                  </a>
+                  <a href="#">
+                    <label className="Nav-Profile-Logout" onClick={signout}>
+                      LOGOUT
+                    </label>
+                  </a>
+                </div>
+              </div> */}
+            </div>
+          </>
+        )}
+        {!user && (
+          <>
+            <div className="Nav-Profile-Flex">
+              <div className="Nav-Profile-Flex-Text">
+                <label
+                  className="Nav-Profile-Logout"
+                  onClick={() => Router.push("/login")}
+                >
+                  LOGIN
+                </label>
+              </div>
+            </div>
+          </>
+        )}
+      </nav>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img
+          className="Nav-Logo-Img"
+          src={Logo}
+          onClick={() => Router.push("/")}
+        />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">
+                หน้าแรก <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                กิจกรรมทั้งหมด
+              </a>
+            </li>
+            {user && (
+              <>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    //onClick={() => handleClick("activity")}
+                    onClick={() => Router.push("/post")}
+                  >
+                    สร้างกิจกรรม
+                  </a>
+                </li>
+              </>
+            )}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                onClick={() => handleIsShown()}
+              >
+                Dropdown
+              </a>
+              <div
+                className={isShown ? "Enable" : "Disable"}
+                aria-labelledby="navbarDropdown"
+              >
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export default navbar;

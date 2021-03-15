@@ -154,6 +154,7 @@ const QUERY_ACTIVITY = gql`
       avgRate
       major
       photoHeader
+      joinUsers{_id,name,studentId}
     }
   }
 `;
@@ -579,7 +580,7 @@ const ActivityInfo = () => {
                         className="Activity-Info-Page-Card-Icon-Size"
                         src={Members}
                       />
-                      {data.getOnePost.participantsNumber} คน
+                      {data.getOnePost.joinUsers.length}/{data.getOnePost.participantsNumber} คน
                     </label>
                     {/* <label className="Activity-Info-Page-Card-Close">
                     <img
@@ -589,7 +590,8 @@ const ActivityInfo = () => {
                     {data.getOnePost.dateCloseApply}
                   </label> */}
                   </div>
-                  <label className="Activity-Info-Page-Card-Status">
+                  <div className="Flex-Column">
+                     <label className="Activity-Info-Page-Card-Status">
                     <img
                       className="Activity-Info-Page-Card-Icon-Size"
                       src={Faculty}
@@ -620,6 +622,8 @@ const ActivityInfo = () => {
                     />
                     {Status}
                   </label>
+                  </div>
+                 
                 </div>
                 <div className="Activity-Info-Page-Card-Bottom">
                   {user && !createUser && (
@@ -899,7 +903,7 @@ const ActivityInfo = () => {
           aria-labelledby="example-modal-sizes-title-lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>ยืนยันสมัครเข้าร่วมกิจกรรม</Modal.Title>
+            <Modal.Title>เช็คชื่อผู้เข้าร่วมกิจกรรม</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <AttendanceCheck />

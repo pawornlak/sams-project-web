@@ -7,6 +7,10 @@
   z-index: 4;
 }
 
+.bg-orange {
+  background: #f77f00;
+}
+
 .Nav-Items {
   height: 80px;
   display: flex;
@@ -18,6 +22,12 @@
   //margin-top: 20px;
   width: 200px;
   //height: 40px;
+  @media screen and (max-width: 800px) {
+    max-width: 150px;
+  }
+  @media screen and (max-width: 300px) {
+    max-width: 120px;
+  }
 }
 
 .Nav-Logo {
@@ -123,76 +133,107 @@
   font-size: 12px;
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-  z-index: 4;
-}
+// .dropdown {
+//   float: left;
+//   overflow: hidden;
+//   z-index: 4;
+// }
 
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-  z-index: 4;
-}
+// .dropdown .dropbtn {
+//   font-size: 16px;
+//   border: none;
+//   outline: none;
+//   color: white;
+//   padding: 14px 16px;
+//   background-color: inherit;
+//   font-family: inherit; /* Important for vertical align on mobile phones */
+//   margin: 0; /* Important for vertical align on mobile phones */
+//   z-index: 4;
+// }
 
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: rgb(0, 0, 0);
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-  z-index: 4;
-}
+// .dropdown .dropbtn {
+//   font-size: 16px;
+//   border: none;
+//   outline: none;
+//   color: rgb(0, 0, 0);
+//   padding: 14px 16px;
+//   background-color: inherit;
+//   font-family: inherit; /* Important for vertical align on mobile phones */
+//   margin: 0; /* Important for vertical align on mobile phones */
+//   z-index: 4;
+// }
 
-.dropdown-content {
-  //margin-right: 15px;
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  //min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 4;
-}
+// .dropdown-content {
+//   //margin-right: 15px;
+//   display: none;
+//   position: absolute;
+//   background-color: #f9f9f9;
+//   //min-width: 160px;
+//   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+//   z-index: 4;
+// }
 
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  z-index: 4;
-}
+// .dropdown-content a {
+//   float: none;
+//   color: black;
+//   padding: 12px 16px;
+//   text-decoration: none;
+//   display: block;
+//   text-align: center;
+//   z-index: 4;
+// }
 
-.dropdown-content a:hover {
-  background-color:  #ddd;
-  color: black;
-  border-radius: 0px;
-  transition: all 0.2s ease-out;
-  height: auto;
+// .dropdown-content a:hover {
+//   background-color:  #ddd;
+//   color: black;
+//   border-radius: 0px;
+//   transition: all 0.2s ease-out;
+//   height: auto;
 
-  //background-color: #ddd;
-  z-index: 4;
-}
+//   //background-color: #ddd;
+//   z-index: 4;
+// }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-  z-index: 4;
-}
+// .dropdown:hover .dropdown-content {
+//   display: block;
+//   z-index: 4;
+// }
 
 .Nav-Profile-Report {
   font-size: 14px;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.Dis-In {
+  input {
+  visibility: hidden;
+  }
+}
+
+.Enable {
+  visibility: visible;
+} 
+
+.Disable {
+  visibility: hidden;
+}
+
+.Enable-btn {
+  visibility: visible;
+} 
+
+.Disable-btn {
+  visibility: hidden;
+}
+
+
+.nav-item {
+  height: 60px;
+}
+
+.dropdown-item {
+  background-color: #FFFFFF !important;
 }
 
 // @media all and (min-width: 992px) {
