@@ -116,7 +116,14 @@
 .Nav-Profile-Img {
   width: 40px;
   height: 40px;
-  margin-top: 5px;
+  margin-left: 10vw;
+  //margin-top: 5px;
+  @media screen and (max-width: 1180px) {
+    margin-left: 2vw;
+  }
+  @media screen and (max-width: 992px) {
+    visibility: hidden;
+  }
 }
 
 .Nav-Profile-Flex-Text {
@@ -228,12 +235,16 @@
 }
 
 
-.nav-item {
-  height: 60px;
-}
+// .nav-item {
+//   height: 60px;
+// }
 
 .dropdown-item {
   background-color: #FFFFFF !important;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
 }
 
 // @media all and (min-width: 992px) {

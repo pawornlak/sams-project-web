@@ -53,13 +53,15 @@ const ActivityReport = () => {
             <div className="Report-Info-Card-Nav-Popular">
               กิจกรรม {data.getAllReportsFromThisPost.reports[0].postName}
             </div>
-            <Link
-              key={postId}
-              href="/activity/[activityId]"
-              as={`/activity/${postId}`}
-            >
-              <button>ตรวจสอบกิจกรรม</button>
-            </Link>
+            <div>
+              <Link
+                key={postId}
+                href="/activity/[activityId]"
+                as={`/activity/${postId}`}
+              >
+                <button>ตรวจสอบกิจกรรม</button>
+              </Link>
+            </div>
             <div className="Report-Info-Card-Nav-Text"> เหตุผลของการรายงาน</div>
             {data.getAllReportsFromThisPost.reports.map((prod) => (
               <div className="Report-Info-Card-Nav-Comment" key={prod._id}>

@@ -80,7 +80,7 @@
 }
 
 .Activity-Info-Page-Card-Box {
-  width: 90px;
+  //width: 90px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -116,6 +116,9 @@
   font-family: "Prompt", sans-serif;
   font-size: 15px;
   margin-left: 5px;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 // .Activity-Info-Page-Card-Area {
@@ -144,6 +147,11 @@
   flex-direction: column;
 }
 
+.Flex-Row {
+  display: flex;
+  flex-direction: row;
+}
+
 .Activity-Info-Page-Card-Img {
   width: 285px;
   height: 380px;
@@ -162,6 +170,9 @@
   width: 259px;
   font-family: "Prompt", sans-serif;
   font-size: 15px;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Info-Page-Card-Right {
@@ -217,6 +228,10 @@
   font-family: "Prompt", sans-serif;
   font-size: 25px;
   font-weight: bold;
+  @media screen and (max-width: 350px) {
+    font-size: 18px;
+    margin-top: 10px;
+  }
 }
 
 .Activity-Info-Page-Card-Date-Time {
@@ -229,12 +244,7 @@
   width: 259px;
   font-family: "Prompt", sans-serif;
   font-size: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to show */
-  -webkit-box-orient: vertical;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 350px) {
     font-size: 12px;
   }
 }
@@ -244,11 +254,17 @@
   width: 259px;
   font-family: "Prompt", sans-serif;
   font-size: 15px;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Info-Page-Card-Location {
   font-family: "Prompt", sans-serif;
   font-size: 15px;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Info-Page-Card-Members-Close {
@@ -261,12 +277,18 @@
   width: 259px;
   font-family: "Prompt", sans-serif;
   font-size: 15px;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Info-Page-Card-Close {
   width: 259px;
   font-family: "Prompt", sans-serif;
   font-size: 15px;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Info-Page-Card-More-Div {
@@ -283,6 +305,9 @@
   font-family: "Prompt", sans-serif;
   font-size: 25px;
   font-weight: bold;
+  @media screen and (max-width: 350px) {
+    font-size: 18px;
+  }
   // border-style: none none none solid;
   // border-width: 1px;
   // border-color: #111111;
@@ -327,6 +352,9 @@
   padding: 5px 5px;
   width: 100%;
   height: auto;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Activity-Info-Page-Card-Star-Rating-Title {
@@ -360,6 +388,9 @@
   padding: 5px 5px;
   width: 100%;
   height: auto;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
 }
 
 .Two-Row {
@@ -384,6 +415,14 @@
   border-radius: 25px;
   border: 1px solid #039bca;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Check {
@@ -394,6 +433,14 @@
   border-radius: 25px;
   border: 1px solid #38c92b;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Mail {
@@ -404,6 +451,14 @@
   border-radius: 25px;
   border: 1px solid #f38621;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Delete {
@@ -414,6 +469,14 @@
   border-radius: 25px;
   border: 1px solid #e21010;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Join {
@@ -424,6 +487,14 @@
   border-radius: 25px;
   border: 1px solid #039bca;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Unjoin {
@@ -434,6 +505,14 @@
   border-radius: 25px;
   border: 1px solid #e21010;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Like {
@@ -444,6 +523,14 @@
   border-radius: 25px;
   border: none;
   font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Report {
@@ -455,6 +542,14 @@
   border: 1px solid #000000;
   font-size: 15px;
   margin-top: 10px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
 
 .Activity-Info-Page-Card-Button-Review {
@@ -466,4 +561,12 @@
   border: 1px solid #000000;
   font-size: 15px;
   margin-top: 10px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
+    width: 80px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+    width: 60px;
+  }
 }
