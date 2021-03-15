@@ -6,9 +6,16 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 import fetch from "isomorphic-unfetch"
 import withApollo from "next-with-apollo"
 import cookie from "cookie"
+import { createUploadLink } from 'apollo-upload-client'
 
 const uri = "https://sams-project-api.herokuapp.com/graphql/"
-
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  //@ts-ignore
+  link: createUploadLink({
+    uri,
+  }),
+});
 const httpLink = createHttpLink({ uri, fetch })
 
 const authLink = setContext((_, { headers }) => {
@@ -34,7 +41,8 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : ""
-    }
+    },
+    client: {client},
   }
 })
 
