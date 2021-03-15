@@ -154,6 +154,7 @@ const QUERY_ACTIVITY = gql`
       avgRate
       major
       photoHeader
+      joinUsers{_id,name,studentId}
     }
   }
 `;
@@ -579,7 +580,7 @@ const ActivityInfo = () => {
                         className="Activity-Info-Page-Card-Icon-Size"
                         src={Members}
                       />
-                      {data.getOnePost.participantsNumber} คน
+                      {data.getOnePost.joinUsers.length}/{data.getOnePost.participantsNumber} คน
                     </label>
                     {/* <label className="Activity-Info-Page-Card-Close">
                     <img
@@ -589,7 +590,8 @@ const ActivityInfo = () => {
                     {data.getOnePost.dateCloseApply}
                   </label> */}
                   </div>
-                  <label className="Activity-Info-Page-Card-Status">
+                  <div className="Flex-Column">
+                     <label className="Activity-Info-Page-Card-Status">
                     <img
                       className="Activity-Info-Page-Card-Icon-Size"
                       src={Faculty}
@@ -620,6 +622,8 @@ const ActivityInfo = () => {
                     />
                     {Status}
                   </label>
+                  </div>
+                 
                 </div>
                 <div className="Activity-Info-Page-Card-Bottom">
                   {user && !createUser && (
@@ -712,15 +716,16 @@ const ActivityInfo = () => {
                       </Link>
                     </div>
                     <div>
-                      <Link
+                      {/* <Link
                         key="attendanceCheck"
                         href="/attendanceCheck/[activityId]"
                         as={`/attendanceCheck/${postId}`}
-                      >
-                        <button className="Activity-Info-Page-Card-Button-Check">
-                          เช็คชื่อ
+                      > */}
+                      <button className="Activity-Info-Page-Card-Button-Check"
+                        onClick={handleShowAttendance}>
+                        เช็คชื่อ
                         </button>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                     <div>
                       {" "}
@@ -790,11 +795,6 @@ const ActivityInfo = () => {
           </div>
         </div>
       </div>
-      {/* <div
-        show={showAttendance}
-        onHide={handleCloseAttendance}>
-        <AttendanceCheck />
-      </div> */}
       <div>
         <Modal
           show={showModalSendEmail}
@@ -903,7 +903,7 @@ const ActivityInfo = () => {
           aria-labelledby="example-modal-sizes-title-lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>ยืนยันสมัครเข้าร่วมกิจกรรม</Modal.Title>
+            <Modal.Title>เช็คชื่อผู้เข้าร่วมกิจกรรม</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <AttendanceCheck />
@@ -913,9 +913,8 @@ const ActivityInfo = () => {
               variant="btn btn-outline-danger"
               onClick={handleCloseAttendance}
             >
-              ปิด
             </Button> 
-          </Modal.Footer>*/}
+          </Modal.Footer> */}
         </Modal>
       </div>
       <div>
@@ -1021,7 +1020,6 @@ const ActivityInfo = () => {
           </Modal.Footer>
         </Modal>
       </div>
-      {/* {showAttendance && <AttendanceCheck/>} */}
     </div>
   );
 };

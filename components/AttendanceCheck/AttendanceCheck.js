@@ -59,7 +59,7 @@ const AttendanceCheck = () => {
             ]
         }
     );
-    console.log(btnGreen)
+    console.log('btn: ' + btnGreen)
     const [btnRed, setbtnRed] = useState({
         color: 'danger',
         data: ''
@@ -69,6 +69,8 @@ const AttendanceCheck = () => {
         checkedUsersId: []
     })
 
+    const [checkjoined, setcheckjoined] = useState(false)
+
     // const [active, setActive] = useState(true);
     const [word, setWord] = useState("")
 
@@ -76,135 +78,142 @@ const AttendanceCheck = () => {
         variables: { postId },
         onCompleted: (data) => {
             if (data) {
-                console.log("data1 : " + data.getOnePost.joinUsers[0].name)
-                console.log("data2 : " + data.getOnePost.joinUsers[0])
-                console.log(data.getOnePost.joinUsers.length)
-                var len_checked = data.getOnePost.checkedUsers.length
-                var len_join = data.getOnePost.joinUsers.length
-                console.log('len-c :' + len_checked)
-                console.log('len-j :' + len_join)
-                console.log(value)
-                // for (const j in data.getOnePost.checkedUsers){
-                //     console.log('jjj : '+j)
-                // }
-                console.log(showW)
-                if (len_checked > 0) {
-                    for (var i = 0; i < len_checked; i++) {
-                        console.log('i' + i)
-                        for (var j = 0; j < len_join; j++) {
-                            console.log('เทียบ ' + data.getOnePost.checkedUsers[i]._id)
-                            console.log('กับ ' + data.getOnePost.joinUsers[j]._id)
+                if (data.getOnePost.joinUsers.length != 0) {
+                    setcheckjoined(true)
+                    console.log("data1 : " + data.getOnePost.joinUsers[0].name)
+                    console.log("data2 : " + data.getOnePost.joinUsers[0])
+                    console.log(data.getOnePost.joinUsers.length)
+                    var len_checked = data.getOnePost.checkedUsers.length
+                    var len_join = data.getOnePost.joinUsers.length
+                    console.log('len-c :' + len_checked)
+                    console.log('len-j :' + len_join)
+                    console.log(value)
+                    // for (const j in data.getOnePost.checkedUsers){
+                    //     console.log('jjj : '+j)
+                    // }
+                    console.log(showW)
+                    if (len_checked > 0) {
+                        for (var i = 0; i < len_checked; i++) {
+                            console.log('i' + i)
+                            for (var j = 0; j < len_join; j++) {
+                                console.log('เทียบ ' + data.getOnePost.checkedUsers[i]._id)
+                                console.log('กับ ' + data.getOnePost.joinUsers[j]._id)
 
-                            console.log(i + ' ' + j)
-                            // if (data.getOnePost.joinUsers[i]._id in data.getOnePost.checkedUsersId._id) {
-                            if (data.getOnePost.joinUsers[j]._id == data.getOnePost.checkedUsers[i]._id) {
-                                console.log('เทียบ ' + data.getOnePost.checkedUsers[i]._id + ' กับ ' + data.getOnePost.joinUsers[j]._id)
-                                btnGreen.datac.push(
-                                    // {
-                                    // datac: [
-                                    {
-                                        name: data.getOnePost.joinUsers[j].name,
-                                        id: data.getOnePost.joinUsers[j]._id,
-                                        btnactive: false
-                                    },
-                                    // {
-                                    //     name: data.getOnePost.joinUsers[i].name,
-                                    //     id: data.getOnePost.joinUsers[i+1]._id,
-                                    //     data: ''
-                                    // },
-                                    //     ]
+                                console.log(i + ' ' + j)
+                                // if (data.getOnePost.joinUsers[i]._id in data.getOnePost.checkedUsersId._id) {
+                                if (data.getOnePost.joinUsers[j]._id == data.getOnePost.checkedUsers[i]._id) {
+                                    console.log('เทียบ ' + data.getOnePost.checkedUsers[i]._id + ' กับ ' + data.getOnePost.joinUsers[j]._id)
+                                    btnGreen.datac.push(
+                                        // {
+                                        // datac: [
+                                        {
+                                            name: data.getOnePost.joinUsers[j].name,
+                                            id: data.getOnePost.joinUsers[j]._id,
+                                            btnactive: false
+                                        },
+                                        // {
+                                        //     name: data.getOnePost.joinUsers[i].name,
+                                        //     id: data.getOnePost.joinUsers[i+1]._id,
+                                        //     data: ''
+                                        // },
+                                        //     ]
+                                        // }
+                                    )
+                                    console.log('i: ' + j)
+                                    console.log('bf : ' + value)
+
+                                    value.push(j)
+                                    show[j] = false
+                                    //setShow[j](false)
+                                    // showW[j] = 'เช็คชื่อแล้ว'
+                                    console.log('sh :' + show[j])
+                                    // setValue(i)
+                                    console.log('af : ' + value)
+                                    // i =data.getOnePost.joinUsers.length-1
+                                    if (i + 1 < len_checked) {
+                                        i += 1
+                                    }
+                                    // if (j + 1 < data.getOnePost.joinUsers.length-1) {
+                                    //     j += 1
                                     // }
-                                )
-                                console.log('i: ' + j)
-                                console.log('bf : ' + value)
-
-                                value.push(j)
-                                show[j] = false
-                                //setShow[j](false)
-                                // showW[j] = 'เช็คชื่อแล้ว'
-                                console.log('sh :' + show[j])
-                                // setValue(i)
-                                console.log('af : ' + value)
-                                // i =data.getOnePost.joinUsers.length-1
-                                if (i + 1 < len_checked) {
-                                    i += 1
+                                    // checkInfo.checkedUsersId.push(data.getOnePost.joinUsers[i]._id)
+                                    // console.log('UserInfo Start : ' + checkInfo.checkedUsersId)
+                                    // value[i] = 1
                                 }
-                                // if (j + 1 < data.getOnePost.joinUsers.length-1) {
-                                //     j += 1
+                                else if (data.getOnePost.joinUsers[j]._id != data.getOnePost.checkedUsers[i]._id) {
+                                    btnGreen.datac.push(
+                                        // {
+                                        // datac: [
+                                        {
+                                            name: data.getOnePost.joinUsers[j].name,
+                                            id: data.getOnePost.joinUsers[j]._id,
+                                            btnactive: true
+                                        },
+                                        // {
+                                        //     name: data.getOnePost.joinUsers[i].name,
+                                        //     id: data.getOnePost.joinUsers[i+1]._id,
+                                        //     data: ''
+                                        // },
+                                        //     ]
+                                        // }
+                                    )
+                                    show[j] = true
+
+                                    console.log('sh :' + show[j])
+                                    // showW[j] = 'เช็คชื่อ'
+
+                                    // value[i] = 0
+                                }
+
                                 // }
-                                // checkInfo.checkedUsersId.push(data.getOnePost.joinUsers[i]._id)
-                                // console.log('UserInfo Start : ' + checkInfo.checkedUsersId)
-                                // value[i] = 1
+
                             }
-                            else if (data.getOnePost.joinUsers[j]._id != data.getOnePost.checkedUsers[i]._id) {
-                                btnGreen.datac.push(
-                                    // {
-                                    // datac: [
-                                    {
-                                        name: data.getOnePost.joinUsers[j].name,
-                                        id: data.getOnePost.joinUsers[j]._id,
-                                        btnactive: true
-                                    },
-                                    // {
-                                    //     name: data.getOnePost.joinUsers[i].name,
-                                    //     id: data.getOnePost.joinUsers[i+1]._id,
-                                    //     data: ''
-                                    // },
-                                    //     ]
-                                    // }
-                                )
-                                show[j] = true
+                        }
+                    }
+                    else {
+                        for (let i = 0; i < len_join; i++) {
+                            btnGreen.datac.push(
+                                // {
+                                // datac: [
+                                {
+                                    name: data.getOnePost.joinUsers[i].name,
+                                    id: data.getOnePost.joinUsers[i]._id,
+                                    btnactive: true
+                                },
+                                // {
+                                //     name: data.getOnePost.joinUsers[i].name,
+                                //     id: data.getOnePost.joinUsers[i+1]._id,
+                                //     data: ''
+                                // },
+                                //     ]
+                                // }
 
-                                console.log('sh :' + show[j])
-                                // showW[j] = 'เช็คชื่อ'
-
-                                // value[i] = 0
-                            }
-
-                            // }
+                            )
+                            show[i] = true
 
                         }
                     }
+                    //  setValue(showW)
+
+                    // for (var i=1; i<data.getOnePost.joinUsers.length; i++) {
+                    //     btnGreen.datac.push({
+                    //         name: data.getOnePost.joinUsers[i].name,
+                    //             id: data.getOnePost.joinUsers[i]._id,
+                    //             data: ''
+                    //     })
+                    // }
+
+                    // console.log('btnG     :   ' + btnGreen.datac[0].name)
+                    setShowW(show)
+                    // console.log(show)
+                    console.log(showW)
+
+                    console.log(value)
                 }
                 else {
-                    for (let i = 0; i < len_join; i++) {
-                        btnGreen.datac.push(
-                            // {
-                            // datac: [
-                            {
-                                name: data.getOnePost.joinUsers[i].name,
-                                id: data.getOnePost.joinUsers[i]._id,
-                                btnactive: true
-                            },
-                            // {
-                            //     name: data.getOnePost.joinUsers[i].name,
-                            //     id: data.getOnePost.joinUsers[i+1]._id,
-                            //     data: ''
-                            // },
-                            //     ]
-                            // }
-
-                        )
-                        show[i] = true
-
-                    }
+                    setcheckjoined(false)
                 }
-                //  setValue(showW)
 
-                // for (var i=1; i<data.getOnePost.joinUsers.length; i++) {
-                //     btnGreen.datac.push({
-                //         name: data.getOnePost.joinUsers[i].name,
-                //             id: data.getOnePost.joinUsers[i]._id,
-                //             data: ''
-                //     })
-                // }
-
-                // console.log('btnG     :   ' + btnGreen.datac[0].name)
-                setShowW(show)
-                // console.log(show)
-                console.log(showW)
-
-                console.log(value)
             }
         },
     });
@@ -220,177 +229,178 @@ const AttendanceCheck = () => {
         }
     })
 
-// const handleGreenClick = e => {
-//     if (btnGreen.color == 'success') {
-//         setbtnGreen({
-//             color: 'outline-success',
-//             // data: prod
-//         })
-//     }
-//     else if (btnGreen.color == 'outline-success') {
-//         setbtnGreen({
-//             color: 'success',
-//             // data: prod
-//         })
-//     }
-// }
-
-
-// const handleRedClick = (name) => {
-//     const id = parseInt(e.target.getAttribute("data-id"));
-//     setbtnGreen({
-//         active: true,
-//         color: 'outline-success'
-//     })
-//     if (btnGreen.active == true) {
-//         setbtnGreen({
-//             active: false,
-//             color: 'success'
-//         })
-//     };
-
-// const id = parseInt(e.target.getAttribute("data-id"));
-// console.log('id : ' + id)
-// console.log('check btn ' + btnGreen.color)
-// console.log(e.target.name)
-// if (btnGreen.color == 'success') {
-//     setbtnGreen({
-//         color: 'outline-success',
-//         // data: prod
-//     })
-// }
-// else if (btnGreen.color == 'outline-success') {
-//     setbtnGreen({
-//         color: 'success',
-//         // data: prod
-//     })
-// }
-// }
-
-const handleChange = (val) => {
-    // console.log(val)
-    console.log('bf set val ' + val)
-    setValue(val);
-    console.log('val: ' + val)
-    console.log(val)
-    console.log('BFclick : ' + btnGreen.datac[v_id].btnactive)
-    // setbtnGreen({
-    //     datac: {
-    //         btnactive : !btnactive
+    // const handleGreenClick = e => {
+    //     if (btnGreen.color == 'success') {
+    //         setbtnGreen({
+    //             color: 'outline-success',
+    //             // data: prod
+    //         })
     //     }
-    // })
-    btnGreen.datac[v_id].btnactive = !btnGreen.datac[v_id].btnactive
-    // if(btnGreen.datac[v_id].btnactive == true){
-    //     console.log('change to false')
-    //     btnGreen.datac[v_id].btnactive = false
-    // }
-    // else if(btnGreen.datac[v_id].btnactive == false){
-    //     console.log('change to true')
-    //     btnGreen.datac[v_id].btnactive = true
-    // }
-    // btnGreen.datac[v_id].btnactive = !btnGreen.datac[v_id].btnactive
-    // setbtnGreen.datac[v_id]({btnactive : !btnactive})
-    console.log('click : ' + btnGreen.datac[v_id].btnactive)
-    showW[v_id] = btnGreen.datac[v_id].btnactive
-    console.log(showW)
-    // console.log(showW)
-    // console.log('btnGreen' + active)
-    // console.log('btnGreen C ' + word)
-    console.log('-----------------------------------')
-    console.log("กด : " + btnGreen.datac[v_id].name)
-    // console.log("กด : "+btnGreen.datac[0].datac[0].name)
-    // var len_checked = checkInfo.checkedUsersId.length;
-    // checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
-
-    // checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
-
-
-    // for (i in len_checked){
-    //     if(btnGreen.datac[v_id].id != checkInfo.checkedUsersId[i]){
-    //         checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
-    //         len_checked+=1
-    //     }
-    //     else {
-    //         console.log('else')
+    //     else if (btnGreen.color == 'outline-success') {
+    //         setbtnGreen({
+    //             color: 'success',
+    //             // data: prod
+    //         })
     //     }
     // }
-    console.log("Info : " + checkInfo.checkedUsersId)
-    // for (var i = 0; i <len_checked; i++){
 
+
+    // const handleRedClick = (name) => {
+    //     const id = parseInt(e.target.getAttribute("data-id"));
+    //     setbtnGreen({
+    //         active: true,
+    //         color: 'outline-success'
+    //     })
+    //     if (btnGreen.active == true) {
+    //         setbtnGreen({
+    //             active: false,
+    //             color: 'success'
+    //         })
+    //     };
+
+    // const id = parseInt(e.target.getAttribute("data-id"));
+    // console.log('id : ' + id)
+    // console.log('check btn ' + btnGreen.color)
+    // console.log(e.target.name)
+    // if (btnGreen.color == 'success') {
+    //     setbtnGreen({
+    //         color: 'outline-success',
+    //         // data: prod
+    //     })
     // }
-    // if(btnGreen.datac[v_id].btnactive == false){
-    //     showW[v_id] = 'เช็คชื่อแล้ว'
+    // else if (btnGreen.color == 'outline-success') {
+    //     setbtnGreen({
+    //         color: 'success',
+    //         // data: prod
+    //     })
     // }
-    // else{
-    //     showW[v_id] = 'เช็คชื่อ'
     // }
 
-}
+    const handleChange = (val) => {
+        // console.log(val)
+        console.log('bf set val ' + val)
+        setValue(val);
+        console.log('val: ' + val)
+        console.log(val)
+        console.log('BFclick : ' + btnGreen.datac[v_id].btnactive)
+        // setbtnGreen({
+        //     datac: {
+        //         btnactive : !btnactive
+        //     }
+        // })
+        btnGreen.datac[v_id].btnactive = !btnGreen.datac[v_id].btnactive
+        // if(btnGreen.datac[v_id].btnactive == true){
+        //     console.log('change to false')
+        //     btnGreen.datac[v_id].btnactive = false
+        // }
+        // else if(btnGreen.datac[v_id].btnactive == false){
+        //     console.log('change to true')
+        //     btnGreen.datac[v_id].btnactive = true
+        // }
+        // btnGreen.datac[v_id].btnactive = !btnGreen.datac[v_id].btnactive
+        // setbtnGreen.datac[v_id]({btnactive : !btnactive})
+        console.log('click : ' + btnGreen.datac[v_id].btnactive)
+        showW[v_id] = btnGreen.datac[v_id].btnactive
+        console.log(showW)
+        // console.log(showW)
+        // console.log('btnGreen' + active)
+        // console.log('btnGreen C ' + word)
+        console.log('-----------------------------------')
+        console.log("กด : " + btnGreen.datac[v_id].name)
+        // console.log("กด : "+btnGreen.datac[0].datac[0].name)
+        // var len_checked = checkInfo.checkedUsersId.length;
+        // checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
 
-const submitBtn = async e => {
-    for (var i = 0; i < btnGreen.datac.length; i++) {
-        if (showW[i] == false) {
-            checkInfo.checkedUsersId.push(btnGreen.datac[i].id)
-            console.log(btnGreen.datac[i].id)
-        }
-        // console.log(i)
-        // else if(show[i] == true){
+        // checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
+
+
+        // for (i in len_checked){
+        //     if(btnGreen.datac[v_id].id != checkInfo.checkedUsersId[i]){
+        //         checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
+        //         len_checked+=1
+        //     }
+        //     else {
+        //         console.log('else')
+        //     }
+        // }
+        console.log("Info : " + checkInfo.checkedUsersId)
+        // for (var i = 0; i <len_checked; i++){
 
         // }
+        // if(btnGreen.datac[v_id].btnactive == false){
+        //     showW[v_id] = 'เช็คชื่อแล้ว'
+        // }
+        // else{
+        //     showW[v_id] = 'เช็คชื่อ'
+        // }
+
     }
-    // const id = parseInt(e.target.getAttribute("data-id"));
-    // console.log(id)
-    // console.log("กด : "+btnGreen.datac[0].datac[0].name)
-    console.log('onsubmit ' + checkInfo.checkedUsersId)
 
-    // if(show[0]==false){
-    //     checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
+    const submitBtn = async e => {
+        for (var i = 0; i < btnGreen.datac.length; i++) {
+            if (showW[i] == false) {
+                checkInfo.checkedUsersId.push(btnGreen.datac[i].id)
+                console.log(btnGreen.datac[i].id)
+            }
+            // console.log(i)
+            // else if(show[i] == true){
+
+            // }
+        }
+        // const id = parseInt(e.target.getAttribute("data-id"));
+        // console.log(id)
+        // console.log("กด : "+btnGreen.datac[0].datac[0].name)
+        console.log('onsubmit ' + checkInfo.checkedUsersId)
+
+        // if(show[0]==false){
+        //     checkInfo.checkedUsersId.push(btnGreen.datac[v_id].id)
+        // }
+        // console.log("กด : "+btnGreen.datac[1].datac[0].name)
+
+        await AttendanceCheck();
+    }
+    // const toggle = e => {
+    //     if (btnGreen.active == 'true') {
+    //         setbtnGreen({
+    //             color: 'เช็คชื่อแล้ว'
+    //         })
+    //     }
+    //     else {
+    //         setbtnGreen({
+    //             color: 'ยังไม่เช็คชื่อ'
+    //         })
+    //     }
     // }
-    // console.log("กด : "+btnGreen.datac[1].datac[0].name)
-
-    await AttendanceCheck();
-}
-// const toggle = e => {
-//     if (btnGreen.active == 'true') {
-//         setbtnGreen({
-//             color: 'เช็คชื่อแล้ว'
-//         })
-//     }
-//     else {
-//         setbtnGreen({
-//             color: 'ยังไม่เช็คชื่อ'
-//         })
-//     }
-// }
-if (error) return <p>Something went wrong, please try again.</p>;
-if (loading) return <p>Loading ...</p>;
+    if (error) return <p>Something went wrong, please try again.</p>;
+    if (loading) return <div className="d-flex justify-content-center"><div class="spinner-border text-info" role="status"> <span class="sr-only"></span> </div></div>;
 
 
 
-return (
+    return (
+        <div className="container">
+            {checkjoined == true? (
+                <div>
+                    {data.getOnePost.joinUsers.map((prod, id) => (
+                        <div key={prod.name} className="row Attend-Div">
+                            <div className="col-8 Attend-Name">{id + 1 + '. '}{prod.name}</div>
+                            <ToggleButtonGroup className="Attend-Btn Dis-In" type="checkbox" value={value} onChange={handleChange}>
+                                <ToggleButton variant="outline-info" value={id} onClick={e => { setVId(id) }}>{showW[id] == false ? "เช็คชื่อแล้ว" : "เช็คชื่อ"}</ToggleButton>
+                            </ToggleButtonGroup>
+                        </div>
+                    ))}
 
-    <div className="container">
-        {data.getOnePost.joinUsers.map((prod, id) => (
-            <div key={prod.name} className="row Attend-Div">
-                <div className="col-8 Attend-Name">{id + 1 + '. '}{prod.name}</div>
-                {/* <Button variant={btnGreen.color} onClick={handleRedClick(prod._id)}>เข้าร่วม</Button>{' '} */}
-                <ToggleButtonGroup className="Attend-Btn Dis-In" type="checkbox" value={value} onChange={handleChange}>
-                    <ToggleButton variant="outline-info" value={id} onClick={e => { setVId(id) }}>{showW[id] == false ? "เช็คชื่อแล้ว" : "เช็คชื่อ"}</ToggleButton>
-                </ToggleButtonGroup>
-
-                {/* <Button variant={btnGreen.color} key={prod.name} name={prod.name} value={prod.name} onClick={handleRedClick}>Success</Button>{' '} */}
-                {/* {btnGreen.datac[id].btnactive == true ? "success" : "outline-seccess"} */}
-                {/* {btnGreen.true ? "success" : "outline-seccess"} */}
-                {/* {show[id] == true ? "เช็คชื่อ" : "เช็คชื่อแล้ว"} */}
-            </div>
-        ))}
-        <div className="d-flex flex-row-reverse">
-            <Button className="Attend-Submit" variant="success" onClick={submitBtn}>บันทึก</Button>
+                    <div className="d-flex flex-row-reverse">
+                        <Button className="Attend-Submit" variant="success" onClick={submitBtn}>บันทึก</Button>
+                    </div>
+                </div>) :
+                (
+                    <div>
+                        <p>ยังไม่มีผู้เข้าร่วมกิจกรรมนี้</p>
+                    </div>
+                )
+            }
         </div>
-
-        {/* {data.getOnePost.joinUsers[0].name} */}
-    </div>
-);
+    );
 };
 
 export default AttendanceCheck;

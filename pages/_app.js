@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const QUERY_USER = {
   query: `
     query {
@@ -46,8 +45,21 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   const token = cookies && cookies.jwt;
   console.log(token);
 
+  if (typeof window !== "undefined") {
+    require("jquery");
+    require("popper.js");
+    require("bootstrap");
+  }
+
   if (!token) {
-    if (router.pathname === "/post" || router.pathname === "/profile" || router.pathname === "/attendancceCheck" || router.pathname === "/editActivity" || router.pathname === "/reportView" || router.pathname === "/reportInfo" ) {
+    if (
+      router.pathname === "/post" ||
+      router.pathname === "/profile" ||
+      router.pathname === "/attendancceCheck" ||
+      router.pathname === "/editActivity" ||
+      router.pathname === "/reportView" ||
+      router.pathname === "/reportInfo"
+    ) {
       ctx.res.writeHead(302, { Location: "/login" });
       ctx.res.end();
     }
@@ -61,14 +73,17 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     }
   }
 
-  const response = await fetch("https://sams-project-api.herokuapp.com/graphql/", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}` || "",
-    },
-    body: JSON.stringify(QUERY_USER),
-  });
+  const response = await fetch(
+    "https://sams-project-api.herokuapp.com/graphql/",
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}` || "",
+      },
+      body: JSON.stringify(QUERY_USER),
+    }
+  );
 
   if (response.ok) {
     const result = await response.json();

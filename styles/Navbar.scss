@@ -7,6 +7,10 @@
   z-index: 4;
 }
 
+.bg-orange {
+  background: #f77f00;
+}
+
 .Nav-Items {
   height: 80px;
   display: flex;
@@ -18,6 +22,12 @@
   //margin-top: 20px;
   width: 200px;
   //height: 40px;
+  @media screen and (max-width: 800px) {
+    max-width: 150px;
+  }
+  @media screen and (max-width: 300px) {
+    max-width: 120px;
+  }
 }
 
 .Nav-Logo {
@@ -198,9 +208,33 @@
 .Dis-In {
   input {
   visibility: hidden;
-}
+  }
 }
 
+.Enable {
+  visibility: visible;
+} 
+
+.Disable {
+  visibility: hidden;
+}
+
+.Enable-btn {
+  visibility: visible;
+} 
+
+.Disable-btn {
+  visibility: hidden;
+}
+
+
+.nav-item {
+  height: 60px;
+}
+
+.dropdown-item {
+  background-color: #FFFFFF !important;
+}
 
 // @media all and (min-width: 992px) {
 // 	.navbar .nav-item .dropdown-menu{ display: none; }
