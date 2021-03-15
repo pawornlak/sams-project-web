@@ -61,7 +61,7 @@ const navbar = () => {
   return (
     <div className="Nav-Items-Div">
       <Navbar className="bg-orange" expand="lg">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home" className="Nav-Logo-Flex">
           <img
             className="Nav-Logo-Img"
             src={Logo}
@@ -69,8 +69,12 @@ const navbar = () => {
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          aria-controls="basic-navbar-nav"
+          className="mr-10"
+        >
+          <Nav className="">
             <Nav.Link href="#home" onClick={() => Router.push("/")}>
               หน้าแรก
             </Nav.Link>
@@ -87,14 +91,29 @@ const navbar = () => {
             )}
             {!user && (
               <>
-                <Nav.Link href="#login" onClick={() => Router.push("/login")}>
-                  Login
-                </Nav.Link>
+                <div className="Flex-Row">
+                  <Nav.Link href="#login" onClick={() => Router.push("/login")}>
+                    Login
+                  </Nav.Link>
+                  <Nav.Link href="#">/</Nav.Link>
+                  <Nav.Link
+                    href="#register"
+                    onClick={() => Router.push("/register")}
+                  >
+                    Register
+                  </Nav.Link>
+                </div>
               </>
             )}
             {user && (
               <>
                 {" "}
+                <img
+                  className="Nav-Profile-Img"
+                  src={User}
+                  //onClick={() => handleClick("")}
+                  onClick={() => Router.push("/profile")}
+                />
                 <NavDropdown
                   id="basic-nav-dropdown"
                   title="โปรไฟล์"

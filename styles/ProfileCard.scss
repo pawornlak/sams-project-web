@@ -18,35 +18,56 @@
 
 .Profile-Card-Div-Topic {
   font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Card-Div-Space {
   font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Card-Code {
   font-size: 16px;
   //font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Card-Name {
   font-size: 16px;
   //font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Card-Email {
   font-size: 16px;
   //font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Card-Department {
   font-size: 16px;
   //font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Card-Phonenumber {
   font-size: 16px;
   //font-weight: bold;
+  @media screen and (max-width: 340px) {
+    font-size: 10px;
+  }
 }
 
 .Profile-Page-Card {
@@ -54,4 +75,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: #111111;
+  @media screen and (max-width: 340px) {
+    width: 180px;
+  }
 }
