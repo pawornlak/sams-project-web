@@ -15,6 +15,9 @@
   height: 30px;
   align-items: center;
   margin: 2px;
+  @media screen and (max-width: 300px) {
+    font-size: 16px;
+  }
 }
 
 .Report-Info-Card-Title-Img {
@@ -63,6 +66,9 @@
   height: 30px;
   align-items: center;
   margin-top: 2px;
+  @media screen and (max-width: 300px) {
+    font-size: 20px;
+  }
 }
 
 .Report-Info-Card-Nav-Text {
@@ -71,12 +77,19 @@
   height: 30px;
   align-items: center;
   margin-top: 20px;
+  @media screen and (max-width: 300px) {
+    font-size: 16px;
+  }
 }
 
 .Report-Info-Card-Nav-Comment {
   font-size: 18px;
   align-items: center;
   margin-top: 2px;
+  border-style: none none solid none;
+  border-color: #333333;
+  border-width: 1px;
+  margin-bottom: 5px;
 }
 
 .Report-Info-Card-List {
@@ -102,6 +115,11 @@
   border-style: solid;
   border-radius: 10px;
   border-color: #2c90af;
+  float: right;
+  @media screen and (max-width: 300px) {
+    font-size: 14px;
+    width: 150px;
+  }
 }
 
 .Report-Info-Card-List-Text {
