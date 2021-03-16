@@ -1,9 +1,9 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
 import { Fade } from "react-slideshow-image";
-import Slideimg1 from "../../Image/slideimg3.jpg";
-import Slideimg2 from "../../Image/slideimg3.jpg";
-import Slideimg3 from "../../Image/slideimg3.jpg";
+import Slideimg1 from "../../Image/slideimg5.jpg";
+import Slideimg2 from "../../Image/slideimg2.jpg";
+import Slideimg3 from "../../Image/slideimg6.jpg";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";

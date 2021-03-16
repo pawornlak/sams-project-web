@@ -126,21 +126,9 @@ const ClosingCard = () => {
 
   return (
     <div className="Main-Page-Card-Div">
-      {/* <div className="Main-Page-Fixed-Bg">
-        <nav className="Main-Page-Card-Nav">
-          <p className="Main-Page-Card-Nav-Popular">กิจกรรมยอดนิยม</p>
-        </nav>
-        <MainPageSlidebar/>
-      </div> */}
-
       <div className="Main-Page-Card-List">
         {data && (
           <>
-            {/* {data.getAllPostsByAuthen.posts.map((prod) => (
-              <div key={prod._id}>
-                <h4>{prod.name}</h4>
-              </div>
-            ))} */}
             {data.getCloseSoonPosts.posts.map((prod) => (
               <div key={prod._id}>
               <Card className="Main-Page-Card">

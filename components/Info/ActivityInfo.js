@@ -20,6 +20,8 @@ import Members from "../../Image/info_user.png";
 import Closed from "../../Image/info_closed.png";
 import Faculty from "../../Image/info_status.png";
 import Rate from "../../Image/info_star.png";
+import Graph from "../../Image/info_star1.png";
+import Users from "../../Image/members.png";
 import Rate1 from "../../Image/info_star1.png";
 import Rate2 from "../../Image/info_star2.png";
 import CloseDate from "../../Image/info_closedate.png";
@@ -47,11 +49,11 @@ import { Button, Modal, DropdownButton, Dropdown } from "react-bootstrap";
 // import { DropdownMenu, MenuItem } from 'react-bootstrap-dropdown-menu';
 
 import ReactStars from "react-rating-stars-component";
-import AttendanceCheck from "../AttendanceCheck/AttendanceCheck"
-import useScript from 'react-script-hook';
+import AttendanceCheck from "../AttendanceCheck/AttendanceCheck";
+import useScript from "react-script-hook";
+import { DirectiveLocation } from "graphql";
 
 // import { HeadProvider, Title, Link, Meta } from 'react-head';
-
 
 // import "js/jquery-1.11.2.min.js"
 // import "js/bootstrap.min.js"
@@ -154,7 +156,18 @@ const QUERY_ACTIVITY = gql`
       avgRate
       major
       photoHeader
-      joinUsers{_id,name,studentId}
+      joinUsers {
+        _id
+        name
+        studentId
+      }
+      reviews {
+        comment
+        rate
+        reviewPostId {
+          _id
+        }
+      }
     }
   }
 `;
@@ -199,6 +212,9 @@ const ActivityInfo = () => {
   console.log("can review >>", canReview);
   const [isAdmin, setIsAdmin] = useState(false);
   console.log("Admin? >>", isAdmin);
+
+  const [rated, setRated] = useState(false);
+  console.log("Reated? >>", rated);
 
   const [Status, setStatus] = useState("");
   console.log("Status? >>", Status);
@@ -342,6 +358,9 @@ const ActivityInfo = () => {
           if (user.type == "admin") {
             setIsAdmin(true);
           }
+        }
+        if (data.getOnePost.avgRate) {
+          setRated(true);
         }
 
         //Router.push("/activity");
@@ -524,6 +543,7 @@ const ActivityInfo = () => {
   return (
     <div className="Activity-Info-Page-Card-Div">
       <div className="Activity-Info-Page-Card-List">
+        <div className="Activity-Info-Page-Card-List-Bg"></div>
         <div className="Activity-Info-Page-Card">
           <div className="Activity-Info-Page-Card-Area">
             <div className="Activity-Info-Page-Card-Flex">
@@ -580,7 +600,8 @@ const ActivityInfo = () => {
                         className="Activity-Info-Page-Card-Icon-Size"
                         src={Members}
                       />
-                      {data.getOnePost.joinUsers.length}/{data.getOnePost.participantsNumber} คน
+                      {data.getOnePost.joinUsers.length}/
+                      {data.getOnePost.participantsNumber} คน
                     </label>
                     {/* <label className="Activity-Info-Page-Card-Close">
                     <img
@@ -591,39 +612,40 @@ const ActivityInfo = () => {
                   </label> */}
                   </div>
                   <div className="Flex-Column">
-                     <label className="Activity-Info-Page-Card-Status">
-                    <img
-                      className="Activity-Info-Page-Card-Icon-Size"
-                      src={Faculty}
-                    />
-                    หน่วยงาน
-                    {data.getOnePost.major}
-                  </label>
-                  <label className="Activity-Info-Page-Card-Status">
-                    <img
-                      className="Activity-Info-Page-Card-Icon-Size"
-                      src={Rate}
-                    />
-                    รีวิวเฉลี่ย
-                    {data.getOnePost.avrRate} คะแนน
-                  </label>
-                  <label className="Activity-Info-Page-Card-Status">
-                    <img
-                      className="Activity-Info-Page-Card-Icon-Size"
-                      src={CloseDate}
-                    />
-                    ปิดรับสมัคร{" "}
-                    {dateFormat(data.getOnePost.dateCloseApply, "d mmmm yyyy")}
-                  </label>
-                  <label className="Activity-Info-Page-Card-Status">
-                    <img
-                      className="Activity-Info-Page-Card-Icon-Size"
-                      src={Closed}
-                    />
-                    {Status}
-                  </label>
+                    <label className="Activity-Info-Page-Card-Status">
+                      <img
+                        className="Activity-Info-Page-Card-Icon-Size"
+                        src={Faculty}
+                      />
+                      หน่วยงาน
+                      {data.getOnePost.major}
+                    </label>
+                    <label className="Activity-Info-Page-Card-Status">
+                      <img
+                        className="Activity-Info-Page-Card-Icon-Size"
+                        src={Rate}
+                      />
+                      รีวิวเฉลี่ย {data.getOnePost.avgRate}/5 คะแนน
+                    </label>
+                    <label className="Activity-Info-Page-Card-Status">
+                      <img
+                        className="Activity-Info-Page-Card-Icon-Size"
+                        src={CloseDate}
+                      />
+                      ปิดรับสมัคร{" "}
+                      {dateFormat(
+                        data.getOnePost.dateCloseApply,
+                        "d mmmm yyyy"
+                      )}
+                    </label>
+                    <label className="Activity-Info-Page-Card-Status">
+                      <img
+                        className="Activity-Info-Page-Card-Icon-Size"
+                        src={Closed}
+                      />
+                      {Status}
+                    </label>
                   </div>
-                 
                 </div>
                 <div className="Activity-Info-Page-Card-Bottom">
                   {user && !createUser && (
@@ -721,10 +743,12 @@ const ActivityInfo = () => {
                         href="/attendanceCheck/[activityId]"
                         as={`/attendanceCheck/${postId}`}
                       > */}
-                      <button className="Activity-Info-Page-Card-Button-Check"
-                        onClick={handleShowAttendance}>
+                      <button
+                        className="Activity-Info-Page-Card-Button-Check"
+                        onClick={handleShowAttendance}
+                      >
                         เช็คชื่อ
-                        </button>
+                      </button>
                       {/* </Link> */}
                     </div>
                     <div>
@@ -792,6 +816,48 @@ const ActivityInfo = () => {
                 </>
               )}
             </div>
+
+            {rated && (
+              <>
+                <div className="Activity-Info-Page-Card-Description-Reviews">
+                  <div className="Activity-Info-Page-Card-Description-Reviews-Flex-Column">
+                    <div className="Activity-Info-Page-Card-Description-Reviews-Name">
+                      {/* <img
+                        className="Activity-Info-Page-Card-Icon-Size"
+                        src={Graph}
+                      /> */}
+                      {data.getOnePost.avgRate}/5 คะแนน
+                    </div>
+                    <div className="Activity-Info-Page-Card-Description-Reviews-Number Activity-Info-Page-Card-Flex-Row">
+                      <img
+                        className="Activity-Info-Page-Card-Icon-Size"
+                        src={Users}
+                      />
+                      โดย {data.getOnePost.reviews.length} ผู้ใช้
+                    </div>
+                  </div>
+                  {data.getOnePost.reviews
+                    .map((prod) => (
+                      <div
+                        key={prod._id}
+                        className="Activity-Info-Page-Card-Description-Reviews-Flex-Row Activity-Info-Page-Card-Description-Reviews-More"
+                      >
+                        <div className="Activity-Info-Page-Card-Flex">
+                          {prod.comment}
+                        </div>
+                        <div className="Activity-Info-Page-Card-Flex-Row">
+                          <img
+                            className="Activity-Info-Page-Card-Icon-Size"
+                            src={Rate}
+                          />
+                          {prod.rate} คะแนน
+                        </div>
+                      </div>
+                    ))
+                    .reverse()}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -870,7 +936,11 @@ const ActivityInfo = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>เข้าร่วมกิจกรรม</Modal.Title>
+            <Modal.Title>
+              {toggleJoin == "unjoin"
+                ? "ยืนยันการเข้าร่วมกิจกรรม"
+                : "ยกเลิกการเข้าร่วมกิจกรรม"}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             ชื่อกิจกรรม : {data.getOnePost.name}
@@ -930,7 +1000,9 @@ const ActivityInfo = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="Activity-Info-Page-Card-Report-Body">
-            <div className="Activity-Info-Page-Card-Report-Name">ชื่อกิจกรรม : {data.getOnePost.name}</div>
+            <div className="Activity-Info-Page-Card-Report-Name">
+              ชื่อกิจกรรม : {data.getOnePost.name}
+            </div>
             <div>
               ข้อความเพิ่มเติม :
               <textarea
@@ -968,13 +1040,11 @@ const ActivityInfo = () => {
           </Modal.Header>
 
           <Modal.Body className="Activity-Info-Page-Card-Star-Rating-Body">
-            <div className="Two-Row">
-              {" "}
-              <div className="Activity-Info-Page-Card-Star-Rating-Name">
-                ชื่อกิจกรรม : {data.getOnePost.name}
-              </div>
+            <div className="Activity-Info-Page-Card-Star-Rating-Name">
+              ชื่อกิจกรรม : {data.getOnePost.name}
             </div>
-            <div>
+
+            <div className="Activity-Info-Page-Card-Star-Rating-Star-Flex">
               <div className="Activity-Info-Page-Card-Star-Rating-Star-Div">
                 <ReactStars
                   count={5}
@@ -992,19 +1062,17 @@ const ActivityInfo = () => {
               /> */}
               </div>
             </div>
-            <div className="Two-Row">
-              {" "}
-              <div className="Activity-Info-Page-Card-Star-Rating-Text-Area">
-                เพิ่มเติม :{" "}
-              </div>
-              <div className="Activity-Info-Page-Card-Star-Rating-Text-Area">
-                <textarea
-                  type="text"
-                  placeholder=""
-                  onChange={handleChangeReviewText}
-                  className="Activity-Info-Page-Card-Star-Rating-Text"
-                />
-              </div>
+
+            <div className="Activity-Info-Page-Card-Star-Rating-Text-Area">
+              เพิ่มเติม :{" "}
+            </div>
+            <div className="Activity-Info-Page-Card-Star-Rating-Text-Area">
+              <textarea
+                type="text"
+                placeholder=""
+                onChange={handleChangeReviewText}
+                className="Activity-Info-Page-Card-Star-Rating-Text"
+              />
             </div>
           </Modal.Body>
           <Modal.Footer>

@@ -138,56 +138,68 @@ const MyPostCard = () => {
               <h4>{prod.name}</h4>
             </div>
           ))} */}
-            {data.getOneUser.posts.map((prod) => (
-              <div key={prod._id}>
-                <Card className="My-Post-Page-Card">
-                  <div className="My-Post-Page-Card-Area">
-                    <div className="My-Post-Page-Card-Flex">
-                      <div className="My-Post-Page-Card-Left">
-                        <Link
-                          key={prod._id}
-                          href="/activity/[activityId]"
-                          as={`/activity/${prod._id}`}
-                        >
-                          <img className="My-Post-Page-Card-Img" src={prod.photoHeader} />
-                        </Link>
-                        {/* <label className="My-Post-Page-Card-Status">
+            {!data.getOneUser.posts[0] && (
+              <>
+                <p className="My-Post-Page-Card-Nav-No">
+                  ยังไม่มีกิจกรรมที่เคยสร้าง
+                </p>
+              </>
+            )}
+            {data.getOneUser.posts
+              .map((prod) => (
+                <div key={prod._id}>
+                  <Card className="My-Post-Page-Card">
+                    <div className="My-Post-Page-Card-Area">
+                      <div className="My-Post-Page-Card-Flex">
+                        <div className="My-Post-Page-Card-Left">
+                          <Link
+                            key={prod._id}
+                            href="/activity/[activityId]"
+                            as={`/activity/${prod._id}`}
+                          >
+                            <img
+                              className="My-Post-Page-Card-Img"
+                              src={prod.photoHeader}
+                            />
+                          </Link>
+                          {/* <label className="My-Post-Page-Card-Status">
                         สถานะกิจกรรม :
                       </label>
                       <label className="My-Post-Page-Card-Status"> {prod.status} </label> */}
-                      </div>
-                      <div className="My-Post-Page-Card-Right">
-                        {" "}
-                        <div className="My-Post-Page-Card-Date-Time">
-                          <label className="My-Post-Page-Card-Date">
-                            {/* <img
+                        </div>
+                        <div className="My-Post-Page-Card-Right">
+                          {" "}
+                          <div className="My-Post-Page-Card-Date-Time">
+                            <label className="My-Post-Page-Card-Date">
+                              {/* <img
                             className="My-Post-Page-Card-Icon-Size"
                             src={Day}
                           /> */}
-                            {dateFormat(prod.dateStart, "dddd d mmmm yyyy")} - {prod.timeStart} น.
-                            {/* <Moment format="D MMM YYYY">
+                              {dateFormat(prod.dateStart, "dddd d mmmm yyyy")} -{" "}
+                              {prod.timeStart} น.
+                              {/* <Moment format="D MMM YYYY">
                             {prod.dateStart}
                           </Moment> */}
-                          </label>
-                          {/* <label className="My-Post-Page-Card-Time">
+                            </label>
+                            {/* <label className="My-Post-Page-Card-Time">
                           <img
                             className="My-Post-Page-Card-Icon-Size"
                             src={Time}
                           />
                           {prod.timeStart} น.
                         </label> */}
-                        </div>
-                        <label className="My-Post-Page-Card-Name">
-                          {prod.name}
-                        </label>
-                        <label className="My-Post-Page-Card-Location">
-                          <img
-                            className="My-Post-Page-Card-Icon-Size"
-                            src={Location}
-                          />
-                          {prod.place}
-                        </label>
-                        {/* <div className="My-Post-Page-Card-Members-Close">
+                          </div>
+                          <label className="My-Post-Page-Card-Name">
+                            {prod.name}
+                          </label>
+                          <label className="My-Post-Page-Card-Location">
+                            <img
+                              className="My-Post-Page-Card-Icon-Size"
+                              src={Location}
+                            />
+                            {prod.place}
+                          </label>
+                          {/* <div className="My-Post-Page-Card-Members-Close">
                         <label className="My-Post-Page-Card-Members">
                           <img
                             className="My-Post-Page-Card-Icon-Size"
@@ -203,10 +215,10 @@ const MyPostCard = () => {
                           {prod.dateCloseApply}
                         </label>
                       </div> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {/* <CardActions>
+                    {/* <CardActions>
                   <div className="My-Post-Page-Card-More-Div">
                     <Link
                       key={prod._id}
@@ -219,9 +231,10 @@ const MyPostCard = () => {
                     </Link>
                   </div>
                 </CardActions> */}
-                </Card>
-              </div>
-            )).reverse()}
+                  </Card>
+                </div>
+              ))
+              .reverse()}
           </>
         )}
       </div>

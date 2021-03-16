@@ -1,7 +1,8 @@
 .login_user_card {
     height: 380px;
     width: 500px;
-    margin-left: 35%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10%;
     margin-bottom: 50px;
     background:white;
@@ -34,12 +35,14 @@
 }
 
 .login_btn {
-    width: 25%;
+    width: 30%;
     height: 50px;
     background: #f77f00!important;
-    border: 1px solid #f77f00;
     color:black !important;
+    font-weight: bold;
+    font-size: 18px;
     border-radius: 25px ;
+    border: 1px solid #f77f00;
     font-size: 15px;
     margin-left: 100px;
     margin-top: 15px;
