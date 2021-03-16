@@ -1,8 +1,9 @@
 .register_user_card {
     height: 700px;
     width: 500px;
-    margin-left: 35%;
-    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
     margin-bottom: 50px;
     background:white;
     justify-content: center;
@@ -63,7 +64,7 @@
     height: 40px;
     width: 250px;
     margin-left: 10px;
-    padding: 10px 20px;
+    //padding: 10px 20px;
     display: inline;
 }
 
@@ -94,5 +95,6 @@
 .flex2{
   flex-direction: column;
   display: flex;
+  margin-right: 5px;
 }
   

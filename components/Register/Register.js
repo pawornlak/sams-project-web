@@ -112,8 +112,8 @@ const register = () => {
     return (
 
         <div className="register_user_card">
-            <div className="d-flex justify-content-center register_form_container">
-                <div className="d-flex justify-content-center register_header">
+            <div className="register_form_container">
+                <div className="register_header">
                     <h3>ลงทะเบียน</h3>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -123,12 +123,12 @@ const register = () => {
                             <RadioGroup name="type">
                                 <div className="flex1">
                                     <div className="flex2">
-                                        <RadioButton label="นักศึกษา" value="student" />
-                                        <RadioButton label="อาจารย์/นักวิจัย" value="teacher" />
+                                        <RadioButton label=" นักศึกษา" value="student" />
+                                        <RadioButton label=" อาจารย์/นักวิจัย" value="teacher" />
                                     </div>
                                     <div className="flex2">
-                                        <RadioButton label="บุคลากรภายใน" value="personnel" />
-                                        <RadioButton label="อื่นๆ" value="other" />
+                                        <RadioButton label=" บุคลากรภายใน" value="personnel" />
+                                        <RadioButton label=" อื่นๆ" value="other" />
                                     </div>
                                 </div>
                             </RadioGroup>
@@ -182,11 +182,11 @@ const register = () => {
                         <input type="password" name="" className="register_input_data" placeholder="" onChange={handleChange} />
                     </div>
                     <div className="register_form-group">
-                        <div className="d-flex justify-content-center mt-3">
+                        <div className="mt-3">
                             <button type="submit" name="button" className="register_btn">สมัคร</button>
                         </div>
-                        <div className="d-flex justify-content-center register_links">
-                            คุณมีบัญชีอยู่แล้ว? <a href="#" className="register_login">เข้าสู่ระบบ ?</a>
+                        <div className="register_links">
+                            คุณมีบัญชีอยู่แล้ว? <a href="#" className="register_login" onClick={() => Router.push("/login")}>เข้าสู่ระบบ</a>
                         </div>
                     </div>
                 </form>
