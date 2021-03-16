@@ -602,3 +602,76 @@
     width: 60px;
   }
 }
+
+.Activity-Info-Page-Card-Description-Reviews {
+  margin-top: 100px;
+  // border-style: solid none none none;
+  // border-width: 2px;
+  // border-color: #7a7a7a;
+}
+
+.Activity-Info-Page-Card-Description-Reviews-Flex-Column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.Activity-Info-Page-Card-Description-Reviews-Flex-Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media screen and (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.Activity-Info-Page-Card-Flex-Row {
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 150px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.Activity-Info-Page-Card-Description-Reviews-Name {
+  margin-top: 5px;
+  padding-left: 30px;
+  font-family: "Prompt", sans-serif;
+  font-size: 23px;
+  font-weight: bold;
+  background-color: #ffb977;
+  .Activity-Info-Page-Card-Icon-Size {
+    width: 25px;
+    height: 25px;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 18px;
+  }
+}
+
+.Activity-Info-Page-Card-Description-Reviews-Number {
+  margin-top: 5px;
+  margin-bottom: 20px !important;
+  padding-left: 30px;
+  font-family: "Prompt", sans-serif;
+  font-size: 18px;
+
+  color: #7a7a7a;
+  //font-weight: bold;
+  @media screen and (max-width: 350px) {
+    font-size: 13px;
+  }
+}
+
+.Activity-Info-Page-Card-Description-Reviews-More {
+  margin-bottom: 15px;
+  padding-left: 30px;
+  border-style: none none solid none;
+  border-width: 2px;
+  border-color: #808080;
+  @media screen and (max-width: 350px) {
+    font-size: 12px;
+  }
+}
