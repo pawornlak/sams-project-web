@@ -124,6 +124,7 @@ const navbar = () => {
                     onClick={() => Router.push("/profile")}
                   >
                     โปรไฟล์
+                  </NavDropdown.Item><NavDropdown.Item>
                   </NavDropdown.Item>
                   {user.type == "admin" && (
                     <>

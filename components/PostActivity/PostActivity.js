@@ -6,10 +6,11 @@ import gql from "graphql-tag";
 
 import CreateAct from "../../Image/create.png"
 import ImageLogo from "../../Image/img.png"
+import { Button, Modal } from "react-bootstrap";
 
 const CREATEPOST = gql`
 mutation CREATEPOST(
-    $photoHeader: String, 
+    $photoHeader: Upload, 
     $name: String!, 
     $dateStart: Date!, 
     $dateEnd: Date!, 
@@ -93,30 +94,78 @@ const post = () => {
         description: "",
     });
 
-    const [post, { loading, error }] = useMutation(CREATEPOST, {
-        variables: { ...userInfo },
-        //เมื่อสำเร็จแล้วจะส่ง data เอามาใช้ได้
-        onCompleted: (data) => {
-            if (data) {
-                console.log('dataaaaaaaaaaa');
-                setUserInfo({
-                    photoHeader: "",
-                    name: "",
-                    dateStart: "",
-                    dateEnd: "",
-                    timeStart: "",
-                    timeEnd: "",
-                    place: "",
-                    participantsNumber: "",
-                    dateCloseApply: "",
-                    major: "",
-                    description: "",
-                });
-                Router.push("/activity")
-            }
-        },
-    });
+    const dateFormat = require("dateformat");
+    dateFormat.i18n = {
+        dayNames: [
+            "อา.",
+            "จ.",
+            "อ.",
+            "พ.",
+            "พฤ.",
+            "ศ.",
+            "ส.",
+            "อา.",
+            "จ.",
+            "อ.",
+            "พ.",
+            "พฤ.",
+            "ศ.",
+            "ส.",
+        ],
+        monthNames: [
+            "ม.ค.",
+            "ก.พ.",
+            "มี.ค.",
+            "เม.ย.",
+            "พ.ค.",
+            "มิ.ย.",
+            "ก.ค.",
+            "ส.ค.",
+            "ก.ย.",
+            "ต.ค.",
+            "พ.ย.",
+            "ธ.ค.",
+            "ม.ค.",
+            "ก.พ.",
+            "มี.ค.",
+            "เม.ย.",
+            "พ.ค.",
+            "มิ.ย.",
+            "ก.ค.",
+            "ส.ค.",
+            "ก.ย.",
+            "ต.ค.",
+            "พ.ย.",
+            "ธ.ค.",
+        ],
+        timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
+    };
 
+    // const [post, { loading, error }] = useMutation(CREATEPOST, {
+    //     variables: { ...userInfo },
+    //     //เมื่อสำเร็จแล้วจะส่ง data เอามาใช้ได้
+    //     onCompleted: (data) => {
+    //         if (data) {
+    //             console.log('dataaaaaaaaaaa');
+    //             setUserInfo({
+    //                 photoHeader: "",
+    //                 name: "",
+    //                 dateStart: "",
+    //                 dateEnd: "",
+    //                 timeStart: "",
+    //                 timeEnd: "",
+    //                 place: "",
+    //                 participantsNumber: "",
+    //                 dateCloseApply: "",
+    //                 major: "",
+    //                 description: "",
+    //             });
+    //             Router.push("/activity")
+    //         }
+    //     },
+    // });
+
+    const [post, { loading, error }] = useMutation(CREATEPOST);
 
     const handleChange = e => {
         console.log("Value", e.target.value)
@@ -130,76 +179,150 @@ const post = () => {
     }
     console.log("value2", userInfo)
 
-    const handleSubmit = async e => {
-        console.log("handle submit")
-        try {
-            console.log("Doneeeeeeeeeee1")
-            e.preventDefault();
-            console.log("Doneeeeeeeeeee2")
-            await post();
-            console.log("Doneeeeeeeeeee3")
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const handleSubmit = async e => {
+    //     console.log("handle submit")
+    //     try {
+    //         console.log("Doneeeeeeeeeee1")
+    //         e.preventDefault();
+    //         console.log("Doneeeeeeeeeee2")
+    //         await post();
+    //         console.log("Doneeeeeeeeeee3")
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+
+    // const handleSubmit = async e => {
+    //     console.log("handle submit")
+    //     try {
+    //         console.log("Doneeeeeeeeeee1")
+    //         e.preventDefault();
+    //         console.log("Doneeeeeeeeeee2")
+    //         await post();
+    //         console.log("Doneeeeeeeeeee3")
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     //image
+    const [posterImg, setposterImg] = useState();
     const [picture, setPicture] = useState(null);
     const [imgData, setImgData] = useState(null);
     const [baseImage, setbaseImage] = useState("");
 
-    const onChangePicture = e => {
-        if (e.target.files[0]) {
-            console.log("picture: ", e.target.files);
-            setPicture(e.target.files[0]);
-            const reader = new FileReader();
-            reader.addEventListener("load", () => {
-                setImgData(reader.result);
-            });
-            userInfo.photoHeader = e.target.files[0].name
-            reader.readAsDataURL(e.target.files[0]);
-        }
+    // const onChangePicture = e => {
+    //     if (e.target.files[0]) {
+    //         console.log("picture: ", e.target.files);
+    //         setPicture(e.target.files[0]);
+    //         const reader = new FileReader();
+    //         reader.addEventListener("load", () => {
+    //             setImgData(reader.result);
+    //         });
+    //         userInfo.photoHeader = e.target.files[0].name
+    //         reader.readAsDataURL(e.target.files[0]);
+    //     }
 
-    };
+    // };
 
-    const uploadImage = async (e) => {
-        console.log('img:' + e.target.files[0].size)
-        const file = e.target.files[0]
-        const base64 = await convertBase64(file)
-        // console.log(base64)
-        setbaseImage(base64)
-        userInfo.photoHeader = base64
-    }
+    // const uploadImage = async (e) => {
+    //     console.log('img:' + e.target.files[0].size)
+    //     const file = e.target.files[0]
+    //     const base64 = await convertBase64(file)
+    //     // console.log(base64)
+    //     setbaseImage(base64)
+    //     userInfo.photoHeader = base64
+    // }
 
-    const convertBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file)
+    // const convertBase64 = (file) => {
+    //     return new Promise((resolve, reject) => {
+    //         const fileReader = new FileReader();
+    //         fileReader.readAsDataURL(file)
 
-            fileReader.onload = () => {
-                resolve(fileReader.result)
-            };
+    //         fileReader.onload = () => {
+    //             resolve(fileReader.result)
+    //         };
 
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        })
-    }
-    const picOnchange = e => {
-        const file = e.target.files[0]
-        const storageRef = app.storage().ref()
-        const fileRef = storageRef.child(file.name)
-    }
+    //         fileReader.onerror = (error) => {
+    //             reject(error);
+    //         };
+    //     })
+    // }
+    // const picOnchange = e => {
+    //     const file = e.target.files[0]
+    //     const storageRef = app.storage().ref()
+    //     const fileRef = storageRef.child(file.name)
+    // }
 
     // Set Drop down and radio
+    const [show, setCreateShow] = useState(false);
+    const handleCreateClose = () => setCreateShow(false);
+    const handleCreateShow = () => setCreateShow(true);
+
     const [major, setMajor] = useState(null);
     const [status, setStatus] = useState(null)
     const [radio, setRadio] = useState(null);
     const [NumofPerson, setNumofPerson] = useState(null);
 
+    const onChangePic = ({
+        target: {
+            files: photoHeader
+        }
+    }) => {
+        setposterImg(photoHeader);
+        console.log(photoHeader);
+        // console.log(file[0].name);
+        if (photoHeader[0]) {
+            console.log("picture: ", photoHeader[0]);
+            setPicture(photoHeader[0]);
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                setImgData(reader.result);
+            });
+            // userInfo.photoHeader = e.target.files[0].name
+            reader.readAsDataURL(photoHeader[0]);
+        }
+    }
+
+    const handleSubmit = ({
+        target: {
+            // validity,
+            files: photoHeader
+        }
+    }) => {
+        photoHeader = posterImg,
+            console.log(photoHeader),
+            console.log(posterImg),
+            // validity.valid &&
+            post({
+                variables: { ...userInfo, photoHeader },
+                onCompleted: (data) => {
+                    if (data) {
+                        console.log('dataaaaaaaaaaa');
+                        setUserInfo({
+                            photoHeader: "",
+                            name: "",
+                            dateStart: "",
+                            dateEnd: "",
+                            timeStart: "",
+                            timeEnd: "",
+                            place: "",
+                            participantsNumber: "",
+                            dateCloseApply: "",
+                            major: "",
+                            description: "",
+                        });
+                    }
+                },
+            }),
+            Router.push("/activity")
+    }
+
+
     return (
         <div className="Post-Page" >
-            <form className="Post-Page" onSubmit={handleSubmit}>
+            <form className="Post-Page">
                 <nav className="Post-Toggle-Button-Menu active">
                     <ul className="Post-Toggle-Button-Items">
                         <label>
@@ -209,26 +332,34 @@ const post = () => {
                     </ul>
                 </nav>
                 <hr></hr>
+
+
+
                 <div className="Post-poster-container" >
                     <div className="previewProfilePic center">
-                        <img className="post_image" src={baseImage} />
+
+                        <img className="post_image" src={imgData} />
 
                         {/* <img className="post_image" src={imgData} /> */}
                         {/* <div className="post_choseimage">
                             <input id="profilePic" type="file" onChange={onChangePicture} />
                         </div> */}
                     </div>
-                    <form className="post_choseimage" onChange={(e) => { uploadImage(e) }}>
+                    <form onChange={onChangePic}>
                         <input
                             type="file"
                             name="photoHeader"
                             id="file"
                             accept=".jpeg, .png, .jpg"
+                            className="Post-choseimage"
                         // value={userInfo.photoHeader}
                         />
                         {/* <input type="submit" /> */}
                     </form>
                 </div>
+
+
+
                 <div className="Post-Input-Container" >
                     <div className="row">
                         <div className="Post-Column Post-Input">
@@ -352,7 +483,7 @@ const post = () => {
                                 <input type="number" name="participantsNumber" className="Post-Input-Small-Fill-Data Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.participantsNumber} />
                                 {/* onChange={(e) => { setNumofPerson(e.target.value) } */}
                                 {/* </RadioGroup> */}
-                               
+
                             </div>
                             <h2>คน</h2>
                         </div>
@@ -435,7 +566,7 @@ const post = () => {
                         <div className="Post-Column"> </div>
                         <div className="Post-Column2">
                             <div className="Post-Left-Button">
-                                <button type="submit" name="button" className="Post-Submit-Button">สร้างกิจกรรม</button>
+                                <button type="submit" name="button" className="Post-Submit-Button" onClick={handleCreateShow}>สร้างกิจกรรม</button>
                             </div>
                         </div>
                     </div>
@@ -443,6 +574,67 @@ const post = () => {
 
 
             </form>
+
+            <div className="Post-Page">
+                {/* <Button variant="primary" >
+                    Launch static backdrop modal
+                </Button> */}
+
+                <Modal
+                    show={show}
+                    onHide={handleCreateClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>ยืนยันข้อมูลกิจกรรม</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        ชื่อกิจกรรม : {userInfo.name}
+                        <br></br>
+            วันที่จัดกิจกรรม :
+            {dateFormat(userInfo.dateStart, "d mmmm yyyy")} ถึง {dateFormat(userInfo.dateEnd, "d mmmm yyyy")}
+                        <br></br>
+            เวลาที่จัดกิจกรรม : {userInfo.timeStart} น. ถึง {userInfo.timeEnd}{" "}
+            น.<br></br>
+            สถานที่ : {userInfo.place}
+                        <br></br>
+            คณะ/วิทยาลัย : {userInfo.major}
+                        <br></br>
+            จำนวนที่เปิดรับสมัคร : {userInfo.participantsNumber} คน<br></br>
+            วันที่ปิดรับสมัคร :{" "}
+                        {dateFormat(userInfo.dateCloseApply, "d mmmm yyyy HH:MM")} น.<br></br>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="btn btn-outline-danger" onClick={handleCreateClose}>
+                            ยกเลิก
+            </Button>
+                        <Button variant="btn btn-info" type="submit" onClick={handleSubmit}>
+                            ยืนยัน
+            </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/* <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    ariaHideApp={false}
+                    contentLabel="Example Modal"
+                >
+
+                    <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
+                    <button onClick={closeModal}>close</button>
+                    <div>I am a modal</div>
+                    <form>
+                        <input />
+                        <button>tab navigation</button>
+                        <button>stays</button>
+                        <button>inside</button>
+                        <button>the modal</button>
+                    </form>
+                </Modal> */}
+            </div>
         </div>
     );
 };

@@ -9,13 +9,8 @@ import cookie from "cookie"
 import { createUploadLink } from 'apollo-upload-client'
 
 const uri = "https://sams-project-api.herokuapp.com/graphql/"
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  //@ts-ignore
-  link: createUploadLink({
-    uri,
-  }),
-});
+
+const uploadLink = createUploadLink({ uri, fetch});
 const httpLink = createHttpLink({ uri, fetch })
 
 const authLink = setContext((_, { headers }) => {
@@ -42,14 +37,13 @@ const authLink = setContext((_, { headers }) => {
       ...headers,
       authorization: token ? `Bearer ${token}` : ""
     },
-    client: {client},
   }
 })
 
 export default withApollo(
   ({ initialState }) => {
     return new ApolloClient({
-      link: authLink.concat(httpLink),
+      link: authLink.concat(uploadLink),
       cache: new InMemoryCache().restore(initialState || {})
     })
   },
