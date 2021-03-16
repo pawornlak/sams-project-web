@@ -118,6 +118,7 @@ const addimg = () => {
       <img src={imgData}></img>
       <input type="file" required onChange={onChange} />
       <button onClick={btnclick}>Click</button>
+      
       {/* <img src="https://sams-storage.s3.ap-southeast-1.amazonaws.com/668d8b19-77c2-40d1-b5b7-d478c15e93e5121162532_635703063980163_4805760419616645597_n.jpg"></img> */}
       {/* <img src="https://sams-storage.s3-ap-southeast-1.amazonaws.com/cee60ae7-c92f-411c-ac10-0a53c91482b7star1.png"></img> */}
     </div>

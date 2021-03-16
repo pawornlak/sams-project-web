@@ -26,7 +26,7 @@ import { Button, Modal } from "react-bootstrap";
 const EDITPOST = gql`
   mutation EDITPOST(
     $postId: String!
-    $photoHeader: String
+    $photoHeader: Upload
     $name: String
     $dateStart: Date
     $dateEnd: Date
@@ -150,6 +150,9 @@ const EditPost = () => {
     description: "",
   });
 
+  const [posterImg, setposterImg] = useState();
+  const [picture, setPicture] = useState(null);
+  const [imgData, setImgData] = useState(null);
   const [baseImage, setbaseImage] = useState("");
   // var subtitle;
   // const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -207,77 +210,127 @@ const EditPost = () => {
           major: data.getOnePost.major,
           description: data.getOnePost.description,
         });
-        setbaseImage(data.getOnePost.photoHeader);
+        setposterImg(data.getOnePost.photoHeader);
+        setImgData(data.getOnePost.photoHeader);
       }
     },
   });
 
-  const [EditPost] = useMutation(EDITPOST, {
-    variables: { postId, ...userInfo },
-    //เมื่อสำเร็จแล้วจะส่ง data เอามาใช้ได้
-    onCompleted: (data2) => {
-      if (data2) {
-        console.log(data2);
-        setUserInfo({
-          photoHeader: "",
-          name: "",
-          dateStart: "",
-          dateEnd: "",
-          timeStart: "",
-          timeEnd: "",
-          place: "",
-          participantsNumber: "",
-          dateCloseApply: "",
-          major: "",
-          description: "",
-        });
-      }
-      // window.location.reload();
+  const [EditPost] = useMutation(EDITPOST);
+  // const [EditPost] = useMutation(EDITPOST, {
+  //   variables: { postId, ...userInfo },
+  //   //เมื่อสำเร็จแล้วจะส่ง data เอามาใช้ได้
+  //   onCompleted: (data2) => {
+  //     if (data2) {
+  //       console.log(data2);
+  //       setUserInfo({
+  //         photoHeader: "",
+  //         name: "",
+  //         dateStart: "",
+  //         dateEnd: "",
+  //         timeStart: "",
+  //         timeEnd: "",
+  //         place: "",
+  //         participantsNumber: "",
+  //         dateCloseApply: "",
+  //         major: "",
+  //         description: "",
+  //       });
+  //     }
+  //     // window.location.reload();
+  //     Router.push("/activity/" + postId);
+  //     // console.log("on complete")
+  //     // console.log(userInfo)
+  //   },
+  // });
+
+  // const uploadImage = async (e) => {
+  //   console.log(e.target.files[0]);
+  //   const file = e.target.files[0];
+  //   const base64 = await convertBase64(file);
+  //   console.log(base64);
+  //   setbaseImage(base64);
+  //   setUserInfo({
+  //     photoHeader: base64,
+  //   });
+  //   // console.log('userInfo :'+userInfo)
+  // };
+
+  // const convertBase64 = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const fileReader = new FileReader();
+  //     fileReader.readAsDataURL(file);
+
+  //     fileReader.onload = () => {
+  //       resolve(fileReader.result);
+  //     };
+
+  //     fileReader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //   });
+  // };
+
+  const onChangePic = ({
+    target: {
+      files: photoHeader
+    }
+  }) => {
+    setposterImg(photoHeader);
+    console.log(photoHeader);
+    // console.log(file[0].name);
+    if (photoHeader[0]) {
+      console.log("picture: ", photoHeader[0]);
+      setPicture(photoHeader[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgData(reader.result);
+        // userInfo.photoHeader = reader.result
+        // setUserInfo({photoHeader: reader.result})
+      });
+      // setUserInfo({photoHeader: imgData})
+      // userInfo.photoHeader = imgData
+      // console.log('onchangeInnnnn '+ imgData)
+      reader.readAsDataURL(photoHeader[0]);
+    }
+    console.log('onchange ' + userInfo.photoHeader)
+  }
+
+  const handleSubmit = ({
+    target: {
+      // validity,
+      files: photoHeader
+    }
+  }) => {
+    photoHeader = posterImg,
+      console.log(photoHeader),
+      console.log(posterImg),
+      console.log(userInfo)
+    // validity.valid &&
+
+    EditPost({
+      variables: { postId, ...userInfo, photoHeader },
+      onCompleted: (data) => {
+        if (data) {
+          console.log('dataaaaaaaaaaa');
+          setUserInfo({
+            photoHeader: "",
+            name: "",
+            dateStart: "",
+            dateEnd: "",
+            timeStart: "",
+            timeEnd: "",
+            place: "",
+            participantsNumber: "",
+            dateCloseApply: "",
+            major: "",
+            description: "",
+          });
+
+        }
+      },
+    }),
       Router.push("/activity/" + postId);
-      // console.log("on complete")
-      // console.log(userInfo)
-    },
-  });
-
-  const uploadImage = async (e) => {
-    console.log(e.target.files[0]);
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    console.log(base64);
-    setbaseImage(base64);
-    setUserInfo({
-      photoHeader: base64,
-    });
-    // console.log('userInfo :'+userInfo)
-  };
-
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-  const handleSubmit = async (e) => {
-    console.log(userInfo);
-    console.log("handle submit");
-    // try {
-    //     console.log("Doneeeeeeeeeee1")
-    //     e.preventDefault();
-    //     console.log("Doneeeeeeeeeee2")
-    await EditPost();
-    //     console.log("Doneeeeeeeeeee3")
-    //     console.log(userInfo)
-    // } catch (error) {
-    //     console.log(error);
-    // }
   };
 
   const cancleSubmit = async (e) => {
@@ -367,23 +420,19 @@ const EditPost = () => {
         <hr></hr>
         <div className="Post-poster-container">
           <div className="previewProfilePic center">
-            <img className="post_image" src={userInfo.photoHeader} />
+            <img className="post_image" src={imgData} />
             {/* <div className="post_choseimage">
                             <input id="profilePic" type="file" />
                         </div> */}
           </div>
-          <form
-            className="post_choseimage"
-            onChange={(e) => {
-              uploadImage(e);
-            }}
-          >
+          <form  onChange={onChangePic}>
             <input
               type="file"
               name="photoHeader"
               id="file"
               accept=".jpeg, .png, .jpg"
-              // value={userInfo.photoHeader}
+              className="Post-choseimage"
+            // value={userInfo.photoHeader}
             />
             {/* <input type="submit" /> */}
           </form>
@@ -737,7 +786,7 @@ const EditPost = () => {
             ชื่อกิจกรรม : {userInfo.name}
             <br></br>
             วันที่จัดกิจกรรม :
-            {dateFormat(userInfo.dateStart, "d mmmm yyyy")} ถึง {dateFormat(userInfo.dateEnd,  "d mmmm yyyy")}
+            {dateFormat(userInfo.dateStart, "d mmmm yyyy")} ถึง {dateFormat(userInfo.dateEnd, "d mmmm yyyy")}
             <br></br>
             เวลาที่จัดกิจกรรม : {userInfo.timeStart} น. ถึง {userInfo.timeEnd}{" "}
             น.<br></br>

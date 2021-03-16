@@ -57,8 +57,8 @@ hr {
 
 .Post-poster-container {
   background-color: black;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
+  // opacity: 0.8;
+  // filter: alpha(opacity=80);
   width: 100%;
   height: 600px;
   position: relative;
@@ -73,8 +73,9 @@ hr {
   width: auto;
   height: 400px;
   object-fit: cover;
-  // margin-left: 50%;
-  background-color: #d0d0d0;
+  margin-left: 30%;
+  margin-top: 50px;
+  // background-color: #d0d0d0;
   
 }
 
@@ -282,6 +283,11 @@ hr {
   outline: 2px !important;
 }
 
+.Post-choseimage{
+  margin-left: 10%;
+  margin-top: 30px;
+  font-family: "Prompt", sans-serif;
+}
 // #profile-pic {
 //     float: left;
 //     margin-right: 20px;
