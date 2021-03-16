@@ -230,11 +230,6 @@ const ActivityCard = () => {
       <div className="Activity-Page-Card-List">
         {data && (
           <>
-            {/* {data.getAllPostsByAuthen.posts.map((prod) => (
-              <div key={prod._id}>
-                <h4>{prod.name}</h4>
-              </div>
-            ))} */}
             {data.getAllPostsByAuthen.posts
               .filter((item) => {
                 if (!value && !valueMajor && !valueYear && !valueStatus)

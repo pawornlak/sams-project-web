@@ -46,29 +46,29 @@ dateFormat.i18n = {
   ],
   monthNames: [
     "ม.ค.",
-      "ก.พ.",
-      "มี.ค.",
-      "เม.ย.",
-      "พ.ค.",
-      "มิ.ย.",
-      "ก.ค.",
-      "ส.ค.",
-      "ก.ย.",
-      "ต.ค.",
-      "พ.ย.",
-      "ธ.ค.",
-      "ม.ค.",
-      "ก.พ.",
-      "มี.ค.",
-      "เม.ย.",
-      "พ.ค.",
-      "มิ.ย.",
-      "ก.ค.",
-      "ส.ค.",
-      "ก.ย.",
-      "ต.ค.",
-      "พ.ย.",
-      "ธ.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
   ],
   timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
 };
@@ -138,57 +138,69 @@ const FavoriteCard = () => {
                 <h4>{prod.name}</h4>
               </div>
             ))} */}
-            {data.getOneUser.favs.map((prod) => (
-              <div key={prod._id}>
-                <Card className="My-Fav-Page-Card">
-                  <div className="My-Fav-Page-Card-Area">
-                    <div className="My-Fav-Page-Card-Flex">
-                      <div className="My-Fav-Page-Card-Left">
-                        <Link
-                          key={prod._id}
-                          href="/activity/[activityId]"
-                          as={`/activity/${prod._id}`}
-                        >
-                          <img className="My-Fav-Page-Card-Img" src={prod.photoHeader} />
-                        </Link>
-                        {/* <label className="My-Fav-Page-Card-Status">
+            {!data.getOneUser.favs[0] && (
+              <>
+                <p className="My-Fav-Page-Card-Nav-No">
+                  ยังไม่มีกิจกรรมที่ชื่นชอบ
+                </p>
+              </>
+            )}
+            {data.getOneUser.favs
+              .map((prod) => (
+                <div key={prod._id}>
+                  <Card className="My-Fav-Page-Card">
+                    <div className="My-Fav-Page-Card-Area">
+                      <div className="My-Fav-Page-Card-Flex">
+                        <div className="My-Fav-Page-Card-Left">
+                          <Link
+                            key={prod._id}
+                            href="/activity/[activityId]"
+                            as={`/activity/${prod._id}`}
+                          >
+                            <img
+                              className="My-Fav-Page-Card-Img"
+                              src={prod.photoHeader}
+                            />
+                          </Link>
+                          {/* <label className="My-Fav-Page-Card-Status">
                           สถานะกิจกรรม :
                         </label>
                         <label className="My-Fav-Page-Card-Status"> {prod.status} </label> */}
-                      </div>
-                      <div className="My-Fav-Page-Card-Right">
-                        <div className="My-Fav-Page-Card-Date-Time">
-                          <label className="My-Fav-Page-Card-Date">
-                            {/* <img
+                        </div>
+                        <div className="My-Fav-Page-Card-Right">
+                          <div className="My-Fav-Page-Card-Date-Time">
+                            <label className="My-Fav-Page-Card-Date">
+                              {/* <img
                               className="My-Fav-Page-Card-Icon-Size"
                               src={Day}
                             /> */}
-                            {dateFormat(prod.dateStart, "dddd d mmmm yyyy")} - {prod.timeStart} น.
-                            {/* <Moment format="D MMM YYYY">
+                              {dateFormat(prod.dateStart, "dddd d mmmm yyyy")} -{" "}
+                              {prod.timeStart} น.
+                              {/* <Moment format="D MMM YYYY">
                               {prod.dateStart}
                             </Moment> */}
-                          </label>
-                          {/* <label className="My-Fav-Page-Card-Time">
+                            </label>
+                            {/* <label className="My-Fav-Page-Card-Time">
                             <img
                               className="My-Fav-Page-Card-Icon-Size"
                               src={Time}
                             />
                             {prod.timeStart} น.
                           </label> */}
-                        </div>
+                          </div>
 
-                        <label className="My-Fav-Page-Card-Name">
-                          {prod.name}
-                        </label>
+                          <label className="My-Fav-Page-Card-Name">
+                            {prod.name}
+                          </label>
 
-                        <label className="My-Fav-Page-Card-Location">
-                          <img
-                            className="My-Fav-Page-Card-Icon-Size"
-                            src={Location}
-                          />
-                          {prod.place}
-                        </label>
-                        {/* <div className="My-Fav-Page-Card-Members-Close">
+                          <label className="My-Fav-Page-Card-Location">
+                            <img
+                              className="My-Fav-Page-Card-Icon-Size"
+                              src={Location}
+                            />
+                            {prod.place}
+                          </label>
+                          {/* <div className="My-Fav-Page-Card-Members-Close">
                           <label className="My-Fav-Page-Card-Members">
                             <img
                               className="My-Fav-Page-Card-Icon-Size"
@@ -204,10 +216,10 @@ const FavoriteCard = () => {
                             {prod.dateCloseApply}
                           </label>
                         </div> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {/* <CardActions>
+                    {/* <CardActions>
                     <div className="My-Fav-Page-Card-More-Div">
                       <Link
                         key={prod._id}
@@ -220,9 +232,10 @@ const FavoriteCard = () => {
                       </Link>
                     </div>
                   </CardActions> */}
-                </Card>
-              </div>
-            )).reverse()}
+                  </Card>
+                </div>
+              ))
+              .reverse()}
           </>
         )}
       </div>

@@ -839,7 +839,7 @@ const ActivityInfo = () => {
                   {data.getOnePost.reviews
                     .map((prod) => (
                       <div
-                        key={prod.reviewPostId._id}
+                        key={prod._id}
                         className="Activity-Info-Page-Card-Description-Reviews-Flex-Row Activity-Info-Page-Card-Description-Reviews-More"
                       >
                         <div className="Activity-Info-Page-Card-Flex">

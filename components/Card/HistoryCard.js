@@ -46,29 +46,29 @@ dateFormat.i18n = {
   ],
   monthNames: [
     "ม.ค.",
-      "ก.พ.",
-      "มี.ค.",
-      "เม.ย.",
-      "พ.ค.",
-      "มิ.ย.",
-      "ก.ค.",
-      "ส.ค.",
-      "ก.ย.",
-      "ต.ค.",
-      "พ.ย.",
-      "ธ.ค.",
-      "ม.ค.",
-      "ก.พ.",
-      "มี.ค.",
-      "เม.ย.",
-      "พ.ค.",
-      "มิ.ย.",
-      "ก.ค.",
-      "ส.ค.",
-      "ก.ย.",
-      "ต.ค.",
-      "พ.ย.",
-      "ธ.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
   ],
   timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
 };
@@ -138,56 +138,68 @@ const HistoryCard = () => {
                 <h4>{prod.name}</h4>
               </div>
             ))} */}
-            {data.getOneUser.joins.map((prod) => (
-              <div key={prod._id}>
-                <Card className="My-Hist-Page-Card">
-                  <div className="My-Hist-Page-Card-Area">
-                    <div className="My-Hist-Page-Card-Flex">
-                      <div className="My-Hist-Page-Card-Left">
-                        <Link
-                          key={prod._id}
-                          href="/activity/[activityId]"
-                          as={`/activity/${prod._id}`}
-                        >
-                          <img className="My-Hist-Page-Card-Img" src={prod.photoHeader} />
-                        </Link>
-                        {/* <label className="My-Hist-Page-Card-Status">
+            {!data.getOneUser.joins[0] && (
+              <>
+                <p className="My-Hist-Page-Card-Nav-No">
+                  ยังไม่มีกิจกรรมที่เคยเข้าร่วม
+                </p>
+              </>
+            )}
+            {data.getOneUser.joins
+              .map((prod) => (
+                <div key={prod._id}>
+                  <Card className="My-Hist-Page-Card">
+                    <div className="My-Hist-Page-Card-Area">
+                      <div className="My-Hist-Page-Card-Flex">
+                        <div className="My-Hist-Page-Card-Left">
+                          <Link
+                            key={prod._id}
+                            href="/activity/[activityId]"
+                            as={`/activity/${prod._id}`}
+                          >
+                            <img
+                              className="My-Hist-Page-Card-Img"
+                              src={prod.photoHeader}
+                            />
+                          </Link>
+                          {/* <label className="My-Hist-Page-Card-Status">
                           สถานะกิจกรรม :
                         </label>
                         <label className="My-Hist-Page-Card-Status"> {prod.status} </label> */}
-                      </div>
-                      <div className="My-Hist-Page-Card-Right">
-                        <div className="My-Hist-Page-Card-Date-Time">
-                          <label className="My-Hist-Page-Card-Date">
-                            {/* <img
+                        </div>
+                        <div className="My-Hist-Page-Card-Right">
+                          <div className="My-Hist-Page-Card-Date-Time">
+                            <label className="My-Hist-Page-Card-Date">
+                              {/* <img
                               className="My-Hist-Page-Card-Icon-Size"
                               src={Day}
                             /> */}
-                            {dateFormat(prod.dateStart, "dddd d mmmm yyyy")} - {prod.timeStart} น.
-                            {/* <Moment format="D MMM YYYY">
+                              {dateFormat(prod.dateStart, "dddd d mmmm yyyy")} -{" "}
+                              {prod.timeStart} น.
+                              {/* <Moment format="D MMM YYYY">
                               {prod.dateStart}
                             </Moment> */}
-                          </label>
-                          {/* <label className="My-Hist-Page-Card-Time">
+                            </label>
+                            {/* <label className="My-Hist-Page-Card-Time">
                             <img
                               className="My-Hist-Page-Card-Icon-Size"
                               src={Time}
                             />
                             {prod.timeStart} น.
                           </label> */}
-                        </div>
-                        <label className="My-Hist-Page-Card-Name">
-                          {prod.name}
-                        </label>
+                          </div>
+                          <label className="My-Hist-Page-Card-Name">
+                            {prod.name}
+                          </label>
 
-                        <label className="My-Hist-Page-Card-Location">
-                          <img
-                            className="My-Hist-Page-Card-Icon-Size"
-                            src={Location}
-                          />
-                          {prod.place}
-                        </label>
-                        {/* <div className="My-Hist-Page-Card-Members-Close">
+                          <label className="My-Hist-Page-Card-Location">
+                            <img
+                              className="My-Hist-Page-Card-Icon-Size"
+                              src={Location}
+                            />
+                            {prod.place}
+                          </label>
+                          {/* <div className="My-Hist-Page-Card-Members-Close">
                           <label className="My-Hist-Page-Card-Members">
                             <img
                               className="My-Hist-Page-Card-Icon-Size"
@@ -203,10 +215,10 @@ const HistoryCard = () => {
                             {prod.dateCloseApply}
                           </label>
                         </div> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {/* <CardActions>
+                    {/* <CardActions>
                     <div className="My-Hist-Page-Card-More-Div">
                       <Link
                         key={prod._id}
@@ -219,9 +231,10 @@ const HistoryCard = () => {
                       </Link>
                     </div>
                   </CardActions> */}
-                </Card>
-              </div>
-            )).reverse()}
+                  </Card>
+                </div>
+              ))
+              .reverse()}
           </>
         )}
       </div>
