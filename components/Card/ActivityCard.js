@@ -20,7 +20,9 @@ import Closed from "../../Image/closed.png";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Link from "next/link";
-import Chest from "../../Image/chest.jpg";
+//import Chest from "../../Image/chest.jpg";
+import Chest from "../../Image/img.png";
+import IMG from "../../Image/img.png";
 import Magnify from "../../Image/filter_magnify.png";
 import Title from "../../Image/filter_title.png";
 import MainPageSlidebar from "../Slidebar/MainPageSlidebar";
@@ -255,7 +257,7 @@ const ActivityCard = () => {
                           >
                             <img
                               className="Activity-Page-Card-Img"
-                              src={prod.photoHeader}
+                              src={prod.photoHeader == null ? Chest : prod.photoHeader}
                             />
                           </Link>
                           {/* <label className="Activity-Page-Card-Status">
