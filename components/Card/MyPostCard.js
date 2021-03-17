@@ -21,7 +21,8 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Link from "next/link";
 
-import Chest from "../../Image/chest.jpg";
+//import Chest from "../../Image/chest.jpg";
+import Chest from "../../Image/img.png";
 import MainPageSlidebar from "../Slidebar/MainPageSlidebar";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -159,7 +160,7 @@ const MyPostCard = () => {
                           >
                             <img
                               className="My-Post-Page-Card-Img"
-                              src={prod.photoHeader}
+                              src={prod.photoHeader == null ? Chest : prod.photoHeader}
                             />
                           </Link>
                           {/* <label className="My-Post-Page-Card-Status">

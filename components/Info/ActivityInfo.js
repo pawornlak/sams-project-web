@@ -7,7 +7,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 // import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Circle from "../../Image/circle.png";
-import Chest from "../../Image/chest.jpg";
+//import Chest from "../../Image/chest.jpg";
+import Chest from "../../Image/img.png";
 import Filter from "../Filter/ActivityFilter";
 import Join from "../../Image/add1.png";
 import Unjoin from "../../Image/add2.png";
@@ -550,7 +551,7 @@ const ActivityInfo = () => {
               <div className="Activity-Info-Page-Card-Left">
                 <img
                   className="Activity-Info-Page-Card-Img"
-                  src={data.getOnePost.photoHeader}
+                  src={data.getOnePost.photoHeader == null ? Chest : data.getOnePost.photoHeader}
                 />
                 {/* <img className="Activity-Info-Page-Card-Img"  src={"data:image/jpeg;base64," + base64encodedimg} /> */}
                 {/* <label className="Activity-Info-Page-Card-Status">
@@ -945,6 +946,12 @@ const ActivityInfo = () => {
           <Modal.Body>
             ชื่อกิจกรรม : {data.getOnePost.name}
             <br></br>
+            วันที่จัดกิจกรรม : {" "}
+            {dateFormat(data.getOnePost.dateStart, "d mmmm yyyy")} ถึง{" "}
+            {dateFormat(data.getOnePost.dateEnd, "d mmmm yyyy")}
+            <br></br>
+            เวลาที่จัดกิจกรรม : {data.getOnePost.timeStart} น. ถึง{" "}
+            {data.getOnePost.timeEnd} น.<br></br>
             สถานที่ : {data.getOnePost.place}
             <br></br>
             คณะ/วิทยาลัย : {data.getOnePost.major}

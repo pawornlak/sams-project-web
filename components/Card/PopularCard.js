@@ -22,7 +22,8 @@ import { Query } from "react-apollo";
 import apolloClient from "../../apollo/apolloclient";
 import Link from "next/link";
 
-import Chest from "../../Image/chest.jpg";
+//import Chest from "../../Image/chest.jpg";
+import Chest from "../../Image/img.png";
 
 const QUERY_POSTAUTH = gql`
   query {
@@ -152,7 +153,7 @@ const PopularCard = () => {
                           href="/activity/[activityId]"
                           as={`/activity/${prod._id}`}
                         >
-                          <img className="Main-Page-Card-Img" src={prod.photoHeader} />
+                          <img className="Main-Page-Card-Img" src={prod.photoHeader == null ? Chest : prod.photoHeader} />
                         </Link>
                         {/* <label className="Main-Page-Card-Status">
                         สถานะกิจกรรม :
