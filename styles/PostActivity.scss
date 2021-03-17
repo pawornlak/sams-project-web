@@ -9,10 +9,14 @@
   // justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   width: 70%;
   margin-bottom: 200px;
   margin: auto;
+  // position: absolute;
+  // top: 500px;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
 }
 
 .Post-Toggle-Button-Menu {
@@ -130,6 +134,7 @@ hr {
 .Post-Input-Container {
   width: 100%;
   margin-top: 5%;
+  z-index: 0;
 }
 
 .Post-Input h2 {
@@ -152,6 +157,7 @@ hr {
   padding: 5px 5px;
   height: 50px;
   width: 100%;
+  z-index: 1;
 }
 
 .Post-Input-Small-Fill-Data {
@@ -220,6 +226,7 @@ hr {
   display: table;
   clear: both;
 }
+
 // .column1 {
 //     float: left;
 //     width: 30%;
@@ -244,7 +251,8 @@ hr {
 
 .Post-Submit-Button {
   width: 150px;
-  height: 120%;
+  height: 50px;
+  // height: 120%;
   background: #f38621 !important;
   color: white !important;
   border-radius: 25px;
@@ -257,7 +265,7 @@ hr {
 
 .Post-Unsubmit-Button {
   width: 150px;
-  height: 120%;
+  height: 50px;
   background: rgb(207, 40, 40) !important;
   color: white !important;
   border-radius: 25px;
@@ -271,7 +279,6 @@ hr {
 
 .Post-Left-Button {
   position: relative;
-  height: 50px;
 }
 
 .Post-Right-Button {

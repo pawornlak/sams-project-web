@@ -7,6 +7,7 @@ import gql from "graphql-tag";
 import CreateAct from "../../Image/create.png"
 import ImageLogo from "../../Image/img.png"
 import { Button, Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const CREATEPOST = gql`
 mutation CREATEPOST(
@@ -81,7 +82,7 @@ function RadioButton(props) {
 
 const post = () => {
     const [userInfo, setUserInfo] = useState({
-        photoHeader: "",
+        // photoHeader: "",
         name: "",
         dateStart: "",
         dateEnd: "",
@@ -301,7 +302,7 @@ const post = () => {
                     if (data) {
                         console.log('dataaaaaaaaaaa');
                         setUserInfo({
-                            photoHeader: "",
+                            // photoHeader: "",
                             name: "",
                             dateStart: "",
                             dateEnd: "",
@@ -317,12 +318,14 @@ const post = () => {
                 },
             }),
             Router.push("/activity")
+            console.log('post Done    plsssssssssss')
+        console.log(userInfo)
     }
 
 
     return (
         <div className="Post-Page" >
-            <form className="Post-Page">
+            <form className="Post-Page" >
                 <nav className="Post-Toggle-Button-Menu active">
                     <ul className="Post-Toggle-Button-Items">
                         <label>
@@ -334,16 +337,11 @@ const post = () => {
                 <hr></hr>
 
 
-
                 <div className="Post-poster-container" >
                     <div className="previewProfilePic center">
 
                         <img className="post_image" src={imgData} />
 
-                        {/* <img className="post_image" src={imgData} /> */}
-                        {/* <div className="post_choseimage">
-                            <input id="profilePic" type="file" onChange={onChangePicture} />
-                        </div> */}
                     </div>
                     <form onChange={onChangePic}>
                         <input
@@ -352,13 +350,9 @@ const post = () => {
                             id="file"
                             accept=".jpeg, .png, .jpg"
                             className="Post-choseimage"
-                        // value={userInfo.photoHeader}
                         />
-                        {/* <input type="submit" /> */}
                     </form>
                 </div>
-
-
 
                 <div className="Post-Input-Container" >
                     <div className="row">
@@ -378,39 +372,15 @@ const post = () => {
                             <div className="Post-Flex-Row">
                                 <form noValidate className="Post-Calendar-Time">
                                     <input type="date" name="dateStart" className="Post-Input-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateStart} />
-
-                                    {/* <TextField
-                                        id="date"
-                                        label="จาก"
-                                        type="date"
-                                        name="dateStart"
-                                        // defaultValue=""
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleChange}
-                                        value={userInfo.dateStart}
-                                    /> */}
                                 </form>
                                 <h2 className="Post-Calendar-Time Post-Input">ถึง</h2>
                                 <form noValidate className="Post-Calendar">
                                     <input type="date" name="dateEnd" className="Post-Input-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateEnd} />
-                                    {/* <TextField
-                                        id="date"
-                                        name="dateEnd"
-                                        label="ถึง"
-                                        type="date"
-                                        // defaultValue="2017-05-24"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={handleChange}
-                                        value={userInfo.dateEnd}
-                                    /> */}
                                 </form>
                             </div>
                         </div>
                     </div>
+
                     <div className="row Post-Input">
                         <div className="Post-Column Post-Input">
                             <h2>เวลาที่จัดกิจกรรม</h2>
@@ -419,41 +389,11 @@ const post = () => {
                             <div className="Post-Flex-Row">
                                 <form className="Post-Calendar-Time Post-Time">
                                     <input type="time" name="timeStart" className="Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.timeStart} />
-                                    {/* <TextField
-                                        id="time"
-                                        name="timeStart"
-                                        label="Alarm clock"
-                                        type="time"
-                                        // defaultValue="07:30"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        inputProps={{
-                                            step: 300, // 5 min
-                                        }}
-                                        onChange={handleChange}
-                                        value={userInfo.timeStart}
-                                    /> */}
                                 </form>
 
                                 <h2 className="Post-Calendar-Time Post-Input">ถึง</h2>
                                 <form className="Post-Calendar-Time">
                                     <input type="time" name="timeEnd" className="Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.timeEnd} />
-                                    {/* <TextField
-                                        id="time"
-                                        name="timeEnd"
-                                        label="Alarm clock"
-                                        type="time"
-                                        // defaultValue="07:30"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        inputProps={{
-                                            step: 300, // 5 min
-                                        }}
-                                        onChange={handleChange}
-                                        value={userInfo.timeEnd}
-                                    /> */}
                                 </form>
 
                             </div>
@@ -477,12 +417,8 @@ const post = () => {
                         </div>
                         <div className="Post-Column2 Post-Input">
                             <div className="Post-Flex-Row Post-margin-top " onChange={(e) => { setRadio(e.target.value) }} onChange={handleChange} value={radio}>
-                                {/* <RadioGroup name="participantsNumber" >
-                                    <RadioButton label="ไม่จำกัดจำนวน" value="10000000000" />
-                                    <RadioButton value={NumofPerson} /> */}
-                                <input type="number" name="participantsNumber" className="Post-Input-Small-Fill-Data Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.participantsNumber} />
-                                {/* onChange={(e) => { setNumofPerson(e.target.value) } */}
-                                {/* </RadioGroup> */}
+
+                                <input type="number" name="participantsNumber" className="Post-Input-Small-Fill-Data Post-Input-Fill-Data" onChange={handleChange} value={userInfo.participantsNumber} />
 
                             </div>
                             <h2>คน</h2>
@@ -496,19 +432,6 @@ const post = () => {
                         <div className="Post-Column2 Post-Input">
                             <div className="Post-Flex-Row">
                                 <input type="datetime-local" name="dateCloseApply" className="Post-Input-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateCloseApply} />
-
-                                {/* <TextField
-                                    id="datetime-local"
-                                    label="close"
-                                    name='dateCloseApply'
-                                    type="datetime-local"
-                                    // defaultValue="2017-05-24T10:30"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={handleChange}
-                                    value={userInfo.dateCloseApply}
-                                /> */}
                             </div>
                         </div>
                     </div>
@@ -548,38 +471,39 @@ const post = () => {
                         </div>
                     </div>
 
-                    {/* <div className="row">
-                        <div className="Post-Column Post-Input">
-                            <h2>อัลบั้มรูปภาพ</h2>
-                        </div>
-                        <div className="Post-Column2 Post-Input">
-                            <img className="Post-margin-top" id="Post-Logo" src={ImageLogo}></img>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="Post-Column Post-Input"></div>
-                        <div className="Post-Column2 Post-Input">
 
-                        </div>
-                    </div> */}
-                    <div className="row">
-                        <div className="Post-Column"> </div>
-                        <div className="Post-Column2">
-                            <div className="Post-Left-Button">
-                                <button type="submit" name="button" className="Post-Submit-Button" onClick={handleCreateShow}>สร้างกิจกรรม</button>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+                {/* <div>
+                    <div className="row">
+                        <button onClick={handleSubmit}>click</button>
+                    </div>
 
-
+                    </div> */}
             </form>
+            <div class="container">
+                <button
+                    type="submit"
+                    name="button"
+                    className="Post-Submit-Button"
+                    onClick={handleCreateShow}
+                >บันทึก</button>
+            </div>
+            {/* <button
+                type="submit"
+                name="button"
+                className="Post-Submit-Button"
+                onClick={handleCreateShow}
+            >บันทึก</button> */}
 
+            {/* <button onClick={handleSubmit}>onClick</button> */}
+            {/* <div className="Post-Page"> */}
+
+            {/* <div className="row"> */}
+
+            {/* </div>
+                </div> */}
             <div className="Post-Page">
-                {/* <Button variant="primary" >
-                    Launch static backdrop modal
-                </Button> */}
-
                 <Modal
                     show={show}
                     onHide={handleCreateClose}
@@ -592,49 +516,28 @@ const post = () => {
                     <Modal.Body>
                         ชื่อกิจกรรม : {userInfo.name}
                         <br></br>
-            วันที่จัดกิจกรรม :
-            {dateFormat(userInfo.dateStart, "d mmmm yyyy")} ถึง {dateFormat(userInfo.dateEnd, "d mmmm yyyy")}
+                            วันที่จัดกิจกรรม :
+                            {dateFormat(userInfo.dateStart, "d mmmm yyyy")} ถึง {dateFormat(userInfo.dateEnd, "d mmmm yyyy")}
                         <br></br>
-            เวลาที่จัดกิจกรรม : {userInfo.timeStart} น. ถึง {userInfo.timeEnd}{" "}
-            น.<br></br>
-            สถานที่ : {userInfo.place}
+                            เวลาที่จัดกิจกรรม : {userInfo.timeStart} น. ถึง {userInfo.timeEnd}{" "}น.<br></br>
+                            สถานที่ : {userInfo.place}
                         <br></br>
-            คณะ/วิทยาลัย : {userInfo.major}
+                            คณะ/วิทยาลัย : {userInfo.major}
                         <br></br>
-            จำนวนที่เปิดรับสมัคร : {userInfo.participantsNumber} คน<br></br>
-            วันที่ปิดรับสมัคร :{" "}
+                            จำนวนที่เปิดรับสมัคร : {userInfo.participantsNumber} คน<br></br>
+                            วันที่ปิดรับสมัคร :{" "}
                         {dateFormat(userInfo.dateCloseApply, "d mmmm yyyy HH:MM")} น.<br></br>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="btn btn-outline-danger" onClick={handleCreateClose}>
-                            ยกเลิก
-            </Button>
+                            ยกเลิก</Button>
                         <Button variant="btn btn-info" type="submit" onClick={handleSubmit}>
-                            ยืนยัน
-            </Button>
+                            ยืนยัน</Button>
                     </Modal.Footer>
                 </Modal>
-                {/* <Modal
-                    isOpen={modalIsOpen}
-                    onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
-                    style={customStyles}
-                    ariaHideApp={false}
-                    contentLabel="Example Modal"
-                >
-
-                    <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-                    <button onClick={closeModal}>close</button>
-                    <div>I am a modal</div>
-                    <form>
-                        <input />
-                        <button>tab navigation</button>
-                        <button>stays</button>
-                        <button>inside</button>
-                        <button>the modal</button>
-                    </form>
-                </Modal> */}
             </div>
+            {/* </div> */}
+
         </div>
     );
 };

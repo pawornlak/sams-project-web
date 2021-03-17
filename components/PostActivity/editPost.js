@@ -335,7 +335,7 @@ const EditPost = () => {
     }
     else {
       EditPost({
-        variables: { postId, ...userInfo},
+        variables: { postId, ...userInfo },
         onCompleted: (data) => {
           if (data) {
             console.log('dataaaaaaaaaaa');
@@ -768,7 +768,27 @@ const EditPost = () => {
 
         {/* </div> */}
       </form>
-      <div className="Post-Page">
+
+      <div class="container">
+        <div className="Post-Left-Button">
+          <button
+            name="button"
+            className="Post-Unsubmit-Button"
+            onClick={cancleSubmit}
+          >
+            ยกเลิก
+                </button>
+          <button
+            type="submit"
+            name="button"
+            className="Post-Submit-Button"
+            onClick={handleEditShow}
+          >
+            บันทึก
+                </button>
+        </div>
+      </div>
+      {/* <div className="Post-Page">
         <div className="Post-Input-Container">
           <div className="row">
             <div className="Post-Column"> </div>
@@ -793,7 +813,7 @@ const EditPost = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="Post-Page">
         {/* <Button variant="primary" >
