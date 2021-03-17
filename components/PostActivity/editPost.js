@@ -184,6 +184,8 @@ const EditPost = () => {
   const handleEditClose = () => setEditShow(false);
   const handleEditShow = () => setEditShow(true);
 
+  const [checkphoto, setcheckphoto] = useState(false);
+
   const [newmajor, setMajor] = useState("");
 
   const { user, signout } = useContext(AuthContext);
@@ -193,9 +195,8 @@ const EditPost = () => {
     onCompleted: (data) => {
       if (data) {
         console.log(data.getOnePost);
-
         setUserInfo({
-          photoHeader: data.getOnePost.photoHeader,
+          // photoHeader: data.getOnePost.photoHeader,
           name: data.getOnePost.name,
           dateStart: dateFormat(data.getOnePost.dateStart, "isoDate"),
           dateEnd: dateFormat(data.getOnePost.dateEnd, "isoDate"),
@@ -276,6 +277,7 @@ const EditPost = () => {
       files: photoHeader
     }
   }) => {
+    setcheckphoto(true)
     setposterImg(photoHeader);
     console.log(photoHeader);
     // console.log(file[0].name);
@@ -307,30 +309,55 @@ const EditPost = () => {
       console.log(posterImg),
       console.log(userInfo)
     // validity.valid &&
+    if (checkphoto == true) {
+      EditPost({
+        variables: { postId, ...userInfo, photoHeader },
+        onCompleted: (data) => {
+          if (data) {
+            console.log('dataaaaaaaaaaa');
+            setUserInfo({
+              // photoHeader: "",
+              name: "",
+              dateStart: "",
+              dateEnd: "",
+              timeStart: "",
+              timeEnd: "",
+              place: "",
+              participantsNumber: "",
+              dateCloseApply: "",
+              major: "",
+              description: "",
+            });
 
-    EditPost({
-      variables: { postId, ...userInfo, photoHeader },
-      onCompleted: (data) => {
-        if (data) {
-          console.log('dataaaaaaaaaaa');
-          setUserInfo({
-            photoHeader: "",
-            name: "",
-            dateStart: "",
-            dateEnd: "",
-            timeStart: "",
-            timeEnd: "",
-            place: "",
-            participantsNumber: "",
-            dateCloseApply: "",
-            major: "",
-            description: "",
-          });
+          }
+        },
+      })
+    }
+    else {
+      EditPost({
+        variables: { postId, ...userInfo},
+        onCompleted: (data) => {
+          if (data) {
+            console.log('dataaaaaaaaaaa');
+            setUserInfo({
+              // photoHeader: "",
+              name: "",
+              dateStart: "",
+              dateEnd: "",
+              timeStart: "",
+              timeEnd: "",
+              place: "",
+              participantsNumber: "",
+              dateCloseApply: "",
+              major: "",
+              description: "",
+            });
 
-        }
-      },
-    }),
-      Router.push("/activity/" + postId);
+          }
+        },
+      })
+    }
+    Router.push("/activity/" + postId);
   };
 
   const cancleSubmit = async (e) => {
@@ -425,7 +452,7 @@ const EditPost = () => {
                             <input id="profilePic" type="file" />
                         </div> */}
           </div>
-          <form  onChange={onChangePic}>
+          <form onChange={onChangePic}>
             <input
               type="file"
               name="photoHeader"
