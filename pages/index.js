@@ -12,8 +12,8 @@ export default function Home() {
       <Navbar />
       <MainPageSlidebar />
       <MainToggle />
-      <Calendar />
-      <Footer />
+      <Calendar/>
+      {/* <Footer /> */}
     </div>
   );
 }

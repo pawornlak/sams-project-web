@@ -166,7 +166,29 @@ const post = () => {
     //     },
     // });
 
-    const [post, { loading, error }] = useMutation(CREATEPOST);
+    const [post, { loading, error }] = useMutation(CREATEPOST, {
+        onCompleted: (data) => {
+            if (data) {
+                console.log('dataaaaaaaaaaa');
+                setUserInfo({
+                    // photoHeader: "",
+                    name: "",
+                    dateStart: "",
+                    dateEnd: "",
+                    timeStart: "",
+                    timeEnd: "",
+                    place: "",
+                    participantsNumber: "",
+                    dateCloseApply: "",
+                    major: "",
+                    description: "",
+                });
+            }
+            Router.push("/activity")
+        },
+
+
+    });
 
     const handleChange = e => {
         console.log("Value", e.target.value)
@@ -177,6 +199,11 @@ const post = () => {
 
             [e.target.name]: e.target.value
         })
+        // console.log(dateEnd);
+        // console.log(dateStart);
+        // if(userInfo.dateEnd < userInfo.dateStart){
+        //     console.log("error")
+        // }
     }
     console.log("value2", userInfo)
 
@@ -261,6 +288,10 @@ const post = () => {
     const handleCreateClose = () => setCreateShow(false);
     const handleCreateShow = () => setCreateShow(true);
 
+    const [showError, setErrorShow] = useState(false);
+    const handleErrorClose = () => setErrorShow(false);
+    const handleErrorShow = () => setErrorShow(true);
+
     const [major, setMajor] = useState(null);
     const [status, setStatus] = useState(null)
     const [radio, setRadio] = useState(null);
@@ -298,27 +329,13 @@ const post = () => {
             // validity.valid &&
             post({
                 variables: { ...userInfo, photoHeader },
-                onCompleted: (data) => {
-                    if (data) {
-                        console.log('dataaaaaaaaaaa');
-                        setUserInfo({
-                            // photoHeader: "",
-                            name: "",
-                            dateStart: "",
-                            dateEnd: "",
-                            timeStart: "",
-                            timeEnd: "",
-                            place: "",
-                            participantsNumber: "",
-                            dateCloseApply: "",
-                            major: "",
-                            description: "",
-                        });
-                    }
-                },
-            }),
-            Router.push("/activity")
-            console.log('post Done    plsssssssssss')
+            }).catch(err => {
+                // if (new Date(userInfo.dateEnd).getTime() < new Date(userInfo.dateStart).getTime()) {
+                setCreateShow(false)
+                setErrorShow(true)
+                // }
+            })
+        console.log('post Done    plsssssssssss')
         console.log(userInfo)
     }
 
@@ -418,7 +435,7 @@ const post = () => {
                         <div className="Post-Column2 Post-Input">
                             <div className="Post-Flex-Row Post-margin-top " onChange={(e) => { setRadio(e.target.value) }} onChange={handleChange} value={radio}>
 
-                                <input type="number" name="participantsNumber" className="Post-Input-Small-Fill-Data Post-Input-Fill-Data" onChange={handleChange} value={userInfo.participantsNumber} />
+                                <input type="number" name="participantsNumber" className="Post-Input-Small-Fill-Data Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.participantsNumber} />
 
                             </div>
                             <h2>คน</h2>
@@ -534,6 +551,19 @@ const post = () => {
                         <Button variant="btn btn-info" type="submit" onClick={handleSubmit}>
                             ยืนยัน</Button>
                     </Modal.Footer>
+                </Modal>
+
+                <Modal
+                    show={showError}
+                    onHide={handleErrorClose}
+                >
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>วันที่จัดกิจกรรมผิด</strong> <br></br>
+              วันที่เริ่มต้นจัดกิจกรรมควรถึงก่อนวันสุดท้ายของการจัดกิจกรรม และควรปิดรับสมัครก่อนวันจัดกิจกรรม
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={handleErrorClose}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </Modal>
             </div>
             {/* </div> */}

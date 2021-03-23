@@ -1053,7 +1053,7 @@ const ActivityInfo = () => {
 
             <div className="Activity-Info-Page-Card-Star-Rating-Star-Flex">
               <div className="Activity-Info-Page-Card-Star-Rating-Star-Div">
-                <ReactStars
+                <ReactStars require
                   count={5}
                   onChange={ratingChanged}
                   size={40}
