@@ -45,7 +45,7 @@
     border: 1px solid #f77f00;
     font-size: 15px;
     margin-left: 100px;
-    margin-top: 15px;
+    // margin-top: 15px;
     margin-bottom: 10px;
 }
 
@@ -87,4 +87,9 @@
 }
 .login_register{
     color: #f77f00;
+}
+.login-Error-Msg{
+    color: red;
+    margin-left: 80px;
+    font-size: 15px;
 }

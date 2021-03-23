@@ -49,13 +49,14 @@ const login = () => {
   };
 
   console.log(userInfo);
-
+  const [showError, setErrorShow] = useState(false);
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       await login();
     } catch (error) {
-      console.log("err1", error);
+      console.log(error.message)
+      setErrorShow(true)
     }
   };
 
@@ -90,6 +91,7 @@ const login = () => {
                 onChange={handleChange}
                 required
               />
+              {showError && <p className="login-Error-Msg">**อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง</p>}
             </div>
             <div className="login_form-group">
               <div className="mt-3">
@@ -103,6 +105,7 @@ const login = () => {
                 <a href="#register" className="login_register" onClick={() => Router.push("/register")}>
                   สมัครบัญชี
                 </a>
+                
               </div>
 
               {/* <div className="d-flex justify-content-center login_links">

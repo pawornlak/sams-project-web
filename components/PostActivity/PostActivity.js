@@ -335,9 +335,6 @@ const post = () => {
                 setErrorShow(true)
                 // }
             })
-        if (handleErrorShow == false) {
-            Router.push("/activity")
-        }
         console.log('post Done    plsssssssssss')
         console.log(userInfo)
     }
