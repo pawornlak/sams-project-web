@@ -491,7 +491,7 @@ const EditPost = () => {
               <input
                 type="text"
                 name="name"
-                className="Post-Input-Fill-Data"
+                className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data"
                 placeholder=""
                 onChange={handleChange}
                 value={userInfo.name}
@@ -510,7 +510,7 @@ const EditPost = () => {
                     type="date"
                     name="dateStart"
                     data-date-format="MM-DD-YYY"
-                    className="Post-Input-Fill-Data"
+                    className="Post-Input-Fill-Data Post-Input-Small-Fill-Data"
                     onChange={handleChange}
                     value={userInfo.dateStart}
                   />
@@ -534,7 +534,7 @@ const EditPost = () => {
                     type="date"
                     name="dateEnd"
                     data-date-format="MM-DD-YYY"
-                    className="Post-Input-Fill-Data"
+                    className="Post-Input-Fill-Data Post-Input-Small-Fill-Data"
                     onChange={handleChange}
                     value={userInfo.dateEnd}
                   />
@@ -564,7 +564,7 @@ const EditPost = () => {
                   <input
                     type="time"
                     name="timeStart"
-                    className="Post-Input-Fill-Data"
+                    className="Post-Input-Fill-Data Post-Input-Small-Fill-Data"
                     onChange={handleChange}
                     value={userInfo.timeStart}
                   />
@@ -590,7 +590,7 @@ const EditPost = () => {
                   <input
                     type="time"
                     name="timeEnd"
-                    className="Post-Input-Fill-Data"
+                    className="Post-Input-Fill-Data Post-Input-Small-Fill-Data"
                     onChange={handleChange}
                     value={userInfo.timeEnd}
                   />
@@ -623,7 +623,7 @@ const EditPost = () => {
               <input
                 type="text"
                 name="place"
-                className="Post-Input-Fill-Data"
+                className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data"
                 placeholder=""
                 onChange={handleChange}
                 value={userInfo.place}
@@ -649,7 +649,7 @@ const EditPost = () => {
                 />
                 {/* onChange={(e) => { setNumofPerson(e.target.value) } */}
                 {/* </RadioGroup> */}
-                <h4>คน</h4>
+                <h3 className="Post-Calendar-Time margin-left10">คน</h3>
               </div>
             </div>
           </div>
@@ -663,7 +663,7 @@ const EditPost = () => {
                 <input
                   type="datetime-local"
                   name="dateCloseApply"
-                  className="Post-Input-Fill-Data"
+                  className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data"
                   onChange={handleChange}
                   value={userInfo.dateCloseApply}
                 />
@@ -694,7 +694,7 @@ const EditPost = () => {
               value={userInfo.major}
             >
               <select
-                className="Post-Input-Fill-Data"
+                className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data"
                 name="major"
                 onChange={majorChange}
                 value={userInfo.major}
