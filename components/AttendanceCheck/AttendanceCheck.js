@@ -218,6 +218,10 @@ const AttendanceCheck = () => {
         },
     });
 
+    const [showSuccess, setSuccessShow] = useState(false);
+    const handleSuccessClose = () => setSuccessShow(false);
+    const handleSuccessShow = () => setSuccessShow(true);
+
     const [AttendanceCheck] = useMutation(ATTENDANCECHECK, {
         variables: { postId, ...checkInfo },
         onCompleted: (data) => {
@@ -225,7 +229,9 @@ const AttendanceCheck = () => {
                 checkedUsersId: []
             })
             // Router.push('/activity/' + postId);
-            console.log("on complete")
+            console.log("on complete");
+            setSuccessShow(true)
+            window.location.reload();
         }
     })
 
@@ -378,7 +384,7 @@ const AttendanceCheck = () => {
 
     return (
         <div className="container">
-            {checkjoined == true? (
+            {checkjoined == true ? (
                 <div>
                     {data.getOnePost.joinUsers.map((prod, id) => (
                         <div key={prod.name} className="row Attend-Div">
@@ -399,6 +405,18 @@ const AttendanceCheck = () => {
                     </div>
                 )
             }
+
+            <Modal
+                show={showSuccess}
+                onHide={handleSuccessClose}
+            >
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>บันทึกเรียบร้อยแล้ว</strong> <br></br>
+              {/* <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={handleSuccessClose}>
+                        <span aria-hidden="true">&times;</span>
+                    </button> */}
+                </div>
+            </Modal>
         </div>
     );
 };

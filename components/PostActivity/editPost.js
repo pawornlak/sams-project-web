@@ -12,7 +12,6 @@ import Link from "next/link";
 
 import Moment from "react-moment";
 import "moment-timezone";
-
 import CreateAct from "../../Image/create.png";
 import ImageLogo from "../../Image/img.png";
 
@@ -21,7 +20,8 @@ import Router from "next/router";
 // import Modal from 'react-modal';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Alert } from "react-bootstrap";
+import { RepeatOutlined } from "@material-ui/icons";
 
 const EDITPOST = gql`
   mutation EDITPOST(
@@ -184,6 +184,12 @@ const EditPost = () => {
   const handleEditClose = () => setEditShow(false);
   const handleEditShow = () => setEditShow(true);
 
+  const [showError, setErrorShow] = useState(false);
+  const handleErrorClose = () => setErrorShow(false);
+  const handleErrorShow = () => setErrorShow(true);
+
+  const [checkError, setcheckError] = useState(false);
+
   const [checkphoto, setcheckphoto] = useState(false);
 
   const [newmajor, setMajor] = useState("");
@@ -217,7 +223,30 @@ const EditPost = () => {
     },
   });
 
-  const [EditPost] = useMutation(EDITPOST);
+  const [EditPost] = useMutation(EDITPOST, {
+
+    //เมื่อสำเร็จแล้วจะส่ง data เอามาใช้ได้
+    onCompleted: (data) => {
+      if (data) {
+        console.log('dataaaaaaaaaaa');
+        setUserInfo({
+          // photoHeader: "",
+          name: "",
+          dateStart: "",
+          dateEnd: "",
+          timeStart: "",
+          timeEnd: "",
+          place: "",
+          participantsNumber: "",
+          dateCloseApply: "",
+          major: "",
+          description: "",
+        });
+
+      }
+      Router.push("/activity/" + postId);
+    }
+  });
   // const [EditPost] = useMutation(EDITPOST, {
   //   variables: { postId, ...userInfo },
   //   //เมื่อสำเร็จแล้วจะส่ง data เอามาใช้ได้
@@ -312,57 +341,43 @@ const EditPost = () => {
     if (checkphoto == true) {
       EditPost({
         variables: { postId, ...userInfo, photoHeader },
-        onCompleted: (data) => {
-          if (data) {
-            console.log('dataaaaaaaaaaa');
-            setUserInfo({
-              // photoHeader: "",
-              name: "",
-              dateStart: "",
-              dateEnd: "",
-              timeStart: "",
-              timeEnd: "",
-              place: "",
-              participantsNumber: "",
-              dateCloseApply: "",
-              major: "",
-              description: "",
-            });
-
-          }
-        },
+      }).catch(err => {
+        // if (new Date(userInfo.dateEnd).getTime() < new Date(userInfo.dateStart).getTime()) {
+        setEditShow(false)
+        setErrorShow(true)
+        // }
       })
     }
     else {
       EditPost({
         variables: { postId, ...userInfo },
-        onCompleted: (data) => {
-          if (data) {
-            console.log('dataaaaaaaaaaa');
-            setUserInfo({
-              // photoHeader: "",
-              name: "",
-              dateStart: "",
-              dateEnd: "",
-              timeStart: "",
-              timeEnd: "",
-              place: "",
-              participantsNumber: "",
-              dateCloseApply: "",
-              major: "",
-              description: "",
-            });
 
-          }
-        },
+        // onError: ((error1)=> {
+        //   if(error1){
+        //     console.log()
+        //     console.log("error: "+ error1.message)
+        //   }
+        // })
+      }).catch(err => {
+        // if (new Date(userInfo.dateEnd).getTime() < new Date(userInfo.dateStart).getTime()) {
+        setEditShow(false)
+        setErrorShow(true)
+        // }
       })
+      console.log()
     }
-    Router.push("/activity/" + postId);
+
+    //  if(showError == false){
+    //    console.log("push")
+    //  Router.push("/activity/" + postId);
+    //  }
   };
 
   const cancleSubmit = async (e) => {
     Router.push("/activity/" + postId);
   };
+
+
 
   const handleChange = (e) => {
     console.log("Value", e.target.value);
@@ -371,6 +386,9 @@ const EditPost = () => {
 
       [e.target.name]: e.target.value,
     });
+    if (new Date(userInfo.dateEnd).getTime() < new Date(userInfo.dateStart).getTime()) {
+      console.log("ERRORRRRRRRRRR")
+    }
   };
 
   const majorChange = (e) => {
@@ -854,26 +872,20 @@ const EditPost = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        {/* <Modal
-                    isOpen={modalIsOpen}
-                    onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
-                    style={customStyles}
-                    ariaHideApp={false}
-                    contentLabel="Example Modal"
-                >
 
-                    <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-                    <button onClick={closeModal}>close</button>
-                    <div>I am a modal</div>
-                    <form>
-                        <input />
-                        <button>tab navigation</button>
-                        <button>stays</button>
-                        <button>inside</button>
-                        <button>the modal</button>
-                    </form>
-                </Modal> */}
+        <Modal
+          show={showError}
+          onHide={handleErrorClose}
+        >
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>วันที่จัดกิจกรรมผิด</strong> <br></br>
+              วันที่เริ่มต้นจัดกิจกรรมควรถึงก่อนวันสุดท้ายของการจัดกิจกรรม และควรปิดรับสมัครก่อนวันจัดกิจกรรม
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={handleErrorClose}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </Modal>
+
       </div>
     </div>
   );

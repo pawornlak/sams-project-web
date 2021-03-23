@@ -11,7 +11,7 @@ export default function Home() {
       <Navbar />
       <MainPageSlidebar />
       <MainToggle />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
