@@ -79,13 +79,20 @@ const navbar = () => {
               หน้าแรก
             </Nav.Link>
             <Nav.Link href="#activity" onClick={() => Router.push("/activity")}>
-              กิจกรรมทั้งหมด
+              ค้นหากิจกรรม
             </Nav.Link>
 
             {user && (
               <>
                 <Nav.Link href="#create" onClick={() => Router.push("/post")}>
                   สร้างกิจกรรม
+                </Nav.Link>
+              </>
+            )}
+            {user && user.type == "admin" && (
+              <>
+                <Nav.Link href="#create" onClick={() => Router.push("/reportView")}>
+                  การรายงาน
                 </Nav.Link>
               </>
             )}
@@ -116,7 +123,7 @@ const navbar = () => {
                 />
                 <NavDropdown
                   id="basic-nav-dropdown"
-                  title="โปรไฟล์"
+                  title={user.name}                  
                   className="mr-sm-2"
                 >
                   <NavDropdown.Item
