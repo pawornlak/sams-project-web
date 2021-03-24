@@ -310,6 +310,9 @@ const ActivityInfo = () => {
   const handleCloseAttendance = () => setShowAttendance(false);
   const handleShowAttendance = () => setShowAttendance(true);
 
+  const [showErrorJoin, setShowErrorJoin] = useState(false);
+  const handleErrorClose = () => setShowErrorJoin(false);
+  const handleErrorShow = () => setShowErrorJoin(true);
   // console.log("data:image/jpeg;base64," + base64encodedimg)
 
   const { data, loading, error } = useQuery(QUERY_ACTIVITY, {
@@ -390,6 +393,11 @@ const ActivityInfo = () => {
         setShowModalJoin(false);
         //Router.push("/activity");
       }
+    },
+    onError: (error) => {
+      console.log("eieierror" + error);
+      setShowErrorJoin(true);
+      setShowModalJoin(false);
     },
   });
 
@@ -551,7 +559,11 @@ const ActivityInfo = () => {
               <div className="Activity-Info-Page-Card-Left">
                 <img
                   className="Activity-Info-Page-Card-Img"
-                  src={data.getOnePost.photoHeader == null ? Chest : data.getOnePost.photoHeader}
+                  src={
+                    data.getOnePost.photoHeader == null
+                      ? Chest
+                      : data.getOnePost.photoHeader
+                  }
                 />
                 {/* <img className="Activity-Info-Page-Card-Img"  src={"data:image/jpeg;base64," + base64encodedimg} /> */}
                 {/* <label className="Activity-Info-Page-Card-Status">
@@ -946,7 +958,7 @@ const ActivityInfo = () => {
           <Modal.Body>
             ชื่อกิจกรรม : {data.getOnePost.name}
             <br></br>
-            วันที่จัดกิจกรรม : {" "}
+            วันที่จัดกิจกรรม :{" "}
             {dateFormat(data.getOnePost.dateStart, "d mmmm yyyy")} ถึง{" "}
             {dateFormat(data.getOnePost.dateEnd, "d mmmm yyyy")}
             <br></br>
@@ -1053,7 +1065,8 @@ const ActivityInfo = () => {
 
             <div className="Activity-Info-Page-Card-Star-Rating-Star-Flex">
               <div className="Activity-Info-Page-Card-Star-Rating-Star-Div">
-                <ReactStars require
+                <ReactStars
+                  require
                   count={5}
                   onChange={ratingChanged}
                   size={40}
@@ -1093,6 +1106,26 @@ const ActivityInfo = () => {
               ยืนยัน
             </Button>
           </Modal.Footer>
+        </Modal>
+      </div>
+      <div>
+        <Modal show={showErrorJoin} onHide={handleErrorClose}>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>ไม่สามารถเข้าร่วมได้</strong> <br></br>
+            กิจกรรมเต็มจำนวนรับหรือปิดรับสมัคร
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              onClick={handleErrorClose}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </Modal>
       </div>
     </div>
