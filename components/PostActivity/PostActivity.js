@@ -168,6 +168,7 @@ const post = () => {
 
     const [post, { loading, error }] = useMutation(CREATEPOST, {
         onCompleted: (data) => {
+            setCreateShow(false)
             if (data) {
                 console.log('dataaaaaaaaaaa');
                 setUserInfo({
@@ -377,7 +378,7 @@ const post = () => {
                             <h2>ชื่อกิจกรรม</h2>
                         </div>
                         <div className="Post-Column2 Post-Input">
-                            <input type="text" name="name" className="Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.name} />
+                            <input type="text" name="name" className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data" required onChange={handleChange} value={userInfo.name} />
                         </div>
                     </div>
 
@@ -388,11 +389,11 @@ const post = () => {
                         <div className="Post-Column2 Post-Input">
                             <div className="Post-Flex-Row">
                                 <form noValidate className="Post-Calendar-Time">
-                                    <input type="date" name="dateStart" className="Post-Input-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateStart} />
+                                    <input type="date" name="dateStart" className="Post-Input-Fill-Data Post-Input-Small-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateStart} />
                                 </form>
                                 <h2 className="Post-Calendar-Time Post-Input">ถึง</h2>
                                 <form noValidate className="Post-Calendar">
-                                    <input type="date" name="dateEnd" className="Post-Input-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateEnd} />
+                                    <input type="date" name="dateEnd" className="Post-Input-Fill-Data Post-Input-Small-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateEnd} />
                                 </form>
                             </div>
                         </div>
@@ -405,12 +406,12 @@ const post = () => {
                         <div className="Post-Column2 Post-Input">
                             <div className="Post-Flex-Row">
                                 <form className="Post-Calendar-Time Post-Time">
-                                    <input type="time" name="timeStart" className="Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.timeStart} />
+                                    <input type="time" name="timeStart" className="Post-Input-Fill-Data Post-Input-Small-Fill-Data" required onChange={handleChange} value={userInfo.timeStart} />
                                 </form>
 
                                 <h2 className="Post-Calendar-Time Post-Input">ถึง</h2>
                                 <form className="Post-Calendar-Time">
-                                    <input type="time" name="timeEnd" className="Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.timeEnd} />
+                                    <input type="time" name="timeEnd" className="Post-Input-Fill-Data Post-Input-Small-Fill-Data" required onChange={handleChange} value={userInfo.timeEnd} />
                                 </form>
 
                             </div>
@@ -424,7 +425,7 @@ const post = () => {
                         </div>
 
                         <div className="Post-Column2 Post-Input">
-                            <input type="text" name="place" className="Post-Input-Fill-Data" placeholder="" required onChange={handleChange} value={userInfo.place} />
+                            <input type="text" name="place" className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data" placeholder="" required onChange={handleChange} value={userInfo.place} />
                         </div>
                     </div>
 
@@ -436,9 +437,9 @@ const post = () => {
                             <div className="Post-Flex-Row Post-margin-top " onChange={(e) => { setRadio(e.target.value) }} onChange={handleChange} value={radio}>
 
                                 <input type="number" name="participantsNumber" className="Post-Input-Small-Fill-Data Post-Input-Fill-Data" required onChange={handleChange} value={userInfo.participantsNumber} />
-
+                                <h3 className="Post-Calendar-Time margin-left10">คน</h3>
                             </div>
-                            <h2>คน</h2>
+
                         </div>
                     </div>
 
@@ -448,7 +449,7 @@ const post = () => {
                         </div>
                         <div className="Post-Column2 Post-Input">
                             <div className="Post-Flex-Row">
-                                <input type="datetime-local" name="dateCloseApply" className="Post-Input-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateCloseApply} />
+                                <input type="datetime-local" name="dateCloseApply" className="Post-Input-Fill-Data Post-Input-Small-Fill-Data" InputLabelProps={{ shrink: true, }} data-date-format="MM-DD-YYY" required onChange={handleChange} value={userInfo.dateCloseApply} />
                             </div>
                         </div>
                     </div>
@@ -458,7 +459,7 @@ const post = () => {
                             <h2>คณะ/วิทยาลัย</h2>
                         </div>
                         <div className="Post-Column2 Post-Input" required onChange={handleChange} value={major}>
-                            <select className="Post-Input-Fill-Data" name="major" onChange={(e) => { setMajor(e.target.value) }} value={major}>
+                            <select className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data" name="major" onChange={(e) => { setMajor(e.target.value) }} value={major}>
                                 <option value="ไม่ระบุ">เลือกคณะ/วิทยาลัย</option>
                                 <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
                                 <option value="คณะสถาปัตยกรรมศาสตร์">คณะสถาปัตยกรรมศาสตร์</option>
