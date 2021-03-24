@@ -510,7 +510,7 @@ const EditPost = () => {
                     type="date"
                     name="dateStart"
                     data-date-format="MM-DD-YYY"
-                    className="Post-Input-Fill-Data Post-Input-Small-Fill-Data"
+                    className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data"
                     onChange={handleChange}
                     value={userInfo.dateStart}
                   />
