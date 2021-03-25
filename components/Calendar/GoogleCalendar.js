@@ -11,7 +11,7 @@ const calendars = [
 
 const GoogleCalendar = () => {
   return (
-    <div>
+    <div className="Main-Toggle-Div">
       <Calendar apiKey={API_KEY} calendars={calendars} />
     </div>
   );
