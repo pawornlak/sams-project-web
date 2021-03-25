@@ -14,6 +14,8 @@ import PopularPNG from "../../Image/main_popular.png";
 import ClosingPNG from "../../Image/main_closing.png";
 import NearingPNG from "../../Image/main_nearing.png";
 
+import Calendar from "../Calendar/GoogleCalendar";
+
 const MainToggle = () => {
   const [toggle, setToggle] = useState("popularpost");
   const [refresh, setRefresh] = useState(false);
@@ -50,77 +52,79 @@ const MainToggle = () => {
 
   return (
     <div className="Main-Toggle-Div Main-Toggle-Button-List">
-      <nav className="Main-Toggle-Button-Menu active">
-        {/* <ProfileCard /> */}
-        <ul className="Main-Toggle-Button-Items">
-          <label
-            className={
-              toggle == "popularpost"
-                ? "Main-Toggle-Button-Popular"
-                : "Main-Toggle-Button-Trans"
-            }
-            onClick={() => handleClick("popularpost")}
-          >
-            <div className="Profile-Toggle-Button-Items-Flex">
-              <div>
-                <img
-                  className={
-                    toggle == "popularpost"
-                      ? "Main-Toggle-Button-Popular-Img"
-                      : "Main-Toggle-Button-Img-Trans"
-                  }
-                  src={PopularPNG}
-                ></img>
+      <div>
+        <nav className="Main-Toggle-Button-Menu active">
+          {/* <ProfileCard /> */}
+          <ul className="Main-Toggle-Button-Items">
+            <label
+              className={
+                toggle == "popularpost"
+                  ? "Main-Toggle-Button-Popular"
+                  : "Main-Toggle-Button-Trans"
+              }
+              onClick={() => handleClick("popularpost")}
+            >
+              <div className="Profile-Toggle-Button-Items-Flex">
+                <div>
+                  <img
+                    className={
+                      toggle == "popularpost"
+                        ? "Main-Toggle-Button-Popular-Img"
+                        : "Main-Toggle-Button-Img-Trans"
+                    }
+                    src={PopularPNG}
+                  ></img>
+                </div>
+                <div>กิจกรรมยอดนิยม</div>
               </div>
-              <div>กิจกรรมยอดนิยม</div>
-            </div>
-          </label>
-          <label
-            className={
-              toggle == "closingpost"
-                ? "Main-Toggle-Button-Closing"
-                : "Main-Toggle-Button-Trans"
-            }
-            onClick={() => handleClick("closingpost")}
-          >
-            <div className="Main-Toggle-Button-Items-Flex">
-              <div>
-                <img
-                  className={
-                    toggle == "closingpost"
-                      ? "Main-Toggle-Button-Closing-Img"
-                      : "Main-Toggle-Button-Img-Trans"
-                  }
-                  src={ClosingPNG}
-                ></img>
+            </label>
+            <label
+              className={
+                toggle == "closingpost"
+                  ? "Main-Toggle-Button-Closing"
+                  : "Main-Toggle-Button-Trans"
+              }
+              onClick={() => handleClick("closingpost")}
+            >
+              <div className="Main-Toggle-Button-Items-Flex">
+                <div>
+                  <img
+                    className={
+                      toggle == "closingpost"
+                        ? "Main-Toggle-Button-Closing-Img"
+                        : "Main-Toggle-Button-Img-Trans"
+                    }
+                    src={ClosingPNG}
+                  ></img>
+                </div>
+                <div>ใกล้ปิดรับสมัคร</div>
               </div>
-              <div>ใกล้ปิดรับสมัคร</div>
-            </div>
-          </label>
-          <label
-            className={
-              toggle == "nearingpost"
-                ? "Main-Toggle-Button-Nearing"
-                : "Main-Toggle-Button-Trans"
-            }
-            onClick={() => handleClick("nearingpost")}
-          >
-            <div className="Profile-Toggle-Button-Items-Flex">
-              <div>
-                <img
-                  className={
-                    toggle == "nearingpost"
-                      ? "Main-Toggle-Button-Nearing-Img"
-                      : "Main-Toggle-Button-Img-Trans"
-                  }
-                  src={NearingPNG}
-                ></img>
+            </label>
+            <label
+              className={
+                toggle == "nearingpost"
+                  ? "Main-Toggle-Button-Nearing"
+                  : "Main-Toggle-Button-Trans"
+              }
+              onClick={() => handleClick("nearingpost")}
+            >
+              <div className="Profile-Toggle-Button-Items-Flex">
+                <div>
+                  <img
+                    className={
+                      toggle == "nearingpost"
+                        ? "Main-Toggle-Button-Nearing-Img"
+                        : "Main-Toggle-Button-Img-Trans"
+                    }
+                    src={NearingPNG}
+                  ></img>
+                </div>
+                <div>จัดขึ้นเร็วๆ นี้</div>
               </div>
-              <div>จัดขึ้นเร็วๆ นี้</div>
-            </div>
-          </label>
-        </ul>
-      </nav>
+            </label>
+          </ul>
+        </nav>
+      </div>
       <div className="Main-Toggle-List">
         {
           toggle == "popularpost" && (
@@ -158,6 +162,9 @@ const MainToggle = () => {
           //   ))
         }
       </div>
+      {/* <div>
+        <Calendar />
+      </div> */}
     </div>
   );
 };
