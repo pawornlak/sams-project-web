@@ -1,20 +1,31 @@
 .login_user_card {
     height: 380px;
     width: 500px;
+    margin-top: 200px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;
     margin-bottom: 50px;
-    background:white;
+    background: white;
     justify-content: center;
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
+    padding-bottom: 10px;
+    @media screen and (max-width: 800px) {
+        height: auto;
+        width: 350px;
+        margin-top: 100px;
+    }
+    @media screen and (max-width: 414px) {
+        height: auto;
+        width: 250px;
+        margin-top: 100px;
+    }
 }
 
-.login_form-group{
+.login_form-group {
     margin-top: 20px;
     margin-left: 20%;
 }
@@ -24,29 +35,57 @@
 }
 
 .login_header {
-    height: 50px;
+    height: 45px;
     background: #f77f00;
     text-align: center;
     margin-bottom: 30px;
+    @media screen and (max-width: 800px) {
+        height: 35px;
+        margin-bottom: 20px;
+    }
+    @media screen and (max-width: 414px) {
+        height: 30px;
+        margin-bottom: 20px;
+    }
 }
-.login_header h3{
-    padding-top: 5px;
-    font-size: 30px;
+.login_header h3 {
+    padding-top: 10px;
+    font-size: 22px;
+    @media screen and (max-width: 800px) {
+        padding-top: 5px;
+        font-size: 18px;
+    }
+    @media screen and (max-width: 414px) {
+        padding-top: 5px;
+        font-size: 15px;
+    }
 }
 
 .login_btn {
     width: 30%;
     height: 50px;
-    background: #f77f00!important;
-    color:black !important;
+    background: #f77f00 !important;
+    color: black !important;
     font-weight: bold;
     font-size: 18px;
-    border-radius: 25px ;
+    border-radius: 25px;
     border: 1px solid #f77f00;
     font-size: 15px;
     margin-left: 100px;
     // margin-top: 15px;
     margin-bottom: 10px;
+    @media screen and (max-width: 800px) {
+        width: 30%;
+        height: 40px;
+        font-size: 15px;
+        margin-left: 70px;
+    }
+    @media screen and (max-width: 414px) {
+        width: 70px;
+        height: 35px;
+        font-size: 12px;
+        margin-left: 50px;
+    }
 }
 
 .login_btn:focus {
@@ -55,20 +94,52 @@
 }
 
 .login_input {
-    margin: 10px 20px;
+    margin: 10px 30px;
     float: right;
+    font-family: "Prompt", sans-serif;
+    @media screen and (max-width: 800px) {
+        font-size: 15px;
+        margin: 8px 15px;
+    }
+    @media screen and (max-width: 414px) {
+        font-size: 11px;
+        margin: 6px 20px;
+    }
 }
-.login_links{
+.login_links {
     margin-left: 50px;
+    @media screen and (max-width: 800px) {
+        font-size: 15px;
+        margin-left: 15px;
+    }
+    @media screen and (max-width: 414px) {
+        font-size: 11px;
+        margin-left: 12px;
+    }
+
 }
-.login_input-user-pass{
-    font-size: 18px;
+.login_register {
+    color: #f77f00;
+}
+.login_input-user-pass {
+    font-size: 16px;
     height: 40px;
     width: 350px;
     margin-left: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 10px;
+    font-family: "Prompt", sans-serif !important;
+    @media screen and (max-width: 800px) {
+        width: 250px;
+        height: 40px;
+        font-size: 13px;
+    }
+    @media screen and (max-width: 414px) {
+        width: 150px;
+        height: 30px;
+        font-size: 11px;
+    }
 }
 .login_input-user-pass:focus {
     border-radius: 5px;
@@ -78,18 +149,24 @@
     outline: 0px !important;
 }
 
-.login_custom-checkbox{
-    margin-left: 70px;   
+.login_custom-checkbox {
+    margin-left: 70px;
 }
-.login_custom-checkbox .login_custom-control-input:checked~.login_custom-control-label::before {
+.login_custom-checkbox .login_custom-control-input:checked ~ .login_custom-control-label::before {
     margin-left: 100px;
     background-color: #c0392b !important;
 }
-.login_register{
-    color: #f77f00;
-}
-.login-Error-Msg{
+
+.login-Error-Msg {
     color: red;
     margin-left: 80px;
     font-size: 15px;
+    @media screen and (max-width: 800px) {
+        margin-left: 50px;
+        font-size: 13px;
+    }
+    @media screen and (max-width: 414px) {
+        font-size: 10px;
+        margin-left: 20px;
+    }
 }

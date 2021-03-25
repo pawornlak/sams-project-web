@@ -1,6 +1,7 @@
 import React, { useState, Children, createContext, useContext } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import Router from "next/router";
 
 const REGISTER = gql`
 mutation REGISTER($type: String!,$name: String!, $studentId: String!, $major: String!, $phoneNumber: String!, $email: String!, $password: String!){
@@ -104,8 +105,8 @@ const register = () => {
     };
 
     // Set Drop down
-    const [dropdown, setDropdown] = useState(null);
-    const [radio, setRadio] = useState(null);
+    const [dropdown, setDropdown] = useState("");
+    const [radio, setRadio] = useState("");
     // const [isChecked, setIsChecked] = useState(false);
 
 
@@ -119,7 +120,7 @@ const register = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="register_input mb-3">
                         <label htmlFor="username">สถานะ</label>
-                        <div name="type" className="register_input_size" onChange={(e) => { setRadio(e.target.value) }} onChange={handleChange} value={radio}>
+                        <div name="type" className="register_input_size" required onChange={(e) => { setRadio(e.target.value) }} onChange={handleChange} value={radio}>
                             <RadioGroup name="type">
                                 <div className="flex1">
                                     <div className="flex2">
@@ -137,16 +138,16 @@ const register = () => {
 
                     <div className="register_input mb-3">
                         <label htmlFor="username">ชื่อ-นามสกุล</label>
-                        <input type="text" name="name" className="register_input_data" onChange={handleChange} value={userInfo.name} />
+                        <input type="text" name="name" className="register_input_data" required onChange={handleChange} value={userInfo.name} />
                     </div>
                     <div className="register_input mb-3">
                         <label htmlFor="password">รหัสนักศึกษา</label>
-                        <input type="text" name="studentId" className="register_input_data" onChange={handleChange} value={userInfo.studentId} />
+                        <input type="text" name="studentId" className="register_input_data" required onChange={handleChange} value={userInfo.studentId} />
                     </div>
                     <div className="register_input mb-3">
                         <div onChange={handleChange} value={dropdown}>
                             <label>คณะ/วิทยาลัย</label>
-                            <select className="register_input_data" name="major" onChange={(e) => { setDropdown(e.target.value) }} value={dropdown} >
+                            <select className="register_input_data" name="major" required onChange={(e) => { setDropdown(e.target.value) }} value={dropdown} >
                             <option value="ไม่ระบุ">เลือกคณะ/วิทยาลัย</option>
                                 <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
                                 <option value="คณะสถาปัตยกรรมศาสตร์">คณะสถาปัตยกรรมศาสตร์</option>
@@ -167,19 +168,19 @@ const register = () => {
                     </div>
                     <div className="register_input mb-3">
                         <label htmlFor="password">เบอร์โทรศัพท์</label>
-                        <input type="text" name="phoneNumber" className="register_input_data" placeholder="" onChange={handleChange} value={userInfo.phoneNumber} />
+                        <input type="text" name="phoneNumber" className="register_input_data" placeholder="" required onChange={handleChange} value={userInfo.phoneNumber} />
                     </div>
                     <div className="register_input mb-3">
                         <label htmlFor="username">อีเมล</label>
-                        <input type="text" name="email" className="register_input_data" placeholder="" onChange={handleChange} value={userInfo.email} />
+                        <input type="text" name="email" className="register_input_data" placeholder="" required onChange={handleChange} value={userInfo.email} />
                     </div>
                     <div className="register_input mb-3">
                         <label htmlFor="password">รหัสผ่าน</label>
-                        <input type="password" name="password" className="register_input_data" placeholder="" onChange={handleChange} value={userInfo.password} />
+                        <input type="password" name="password" className="register_input_data" placeholder="" required onChange={handleChange} value={userInfo.password} />
                     </div>
                     <div className="register_input mb-3">
                         <label htmlFor="password">ยืนยันรหัสผ่าน</label>
-                        <input type="password" name="" className="register_input_data" placeholder="" onChange={handleChange} />
+                        <input type="password" name="" className="register_input_data" placeholder="" required onChange={handleChange} />
                     </div>
                     <div className="register_form-group">
                         <div className="mt-3">
