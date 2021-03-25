@@ -49,14 +49,14 @@ const login = () => {
   };
 
   console.log(userInfo);
-  const [showError, setErrorShow] = useState(false);
+  const [showError, setErrorShow] = useState("");
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       await login();
     } catch (error) {
       console.log(error.message)
-      setErrorShow(true)
+      setErrorShow("**อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง")
     }
   };
 
@@ -91,7 +91,8 @@ const login = () => {
                 onChange={handleChange}
                 required
               />
-              {showError && <p className="login-Error-Msg">**อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง</p>}
+              <p className="login-Error-Msg">{showError}</p>
+              {/* {showError && <p className="login-Error-Msg">**อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง</p>} */}
             </div>
             <div className="login_form-group">
               <div className="mt-3">
