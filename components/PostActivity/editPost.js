@@ -151,8 +151,8 @@ const EditPost = () => {
   });
 
   const [posterImg, setposterImg] = useState();
-  const [picture, setPicture] = useState(null);
-  const [imgData, setImgData] = useState(null);
+  const [picture, setPicture] = useState("");
+  const [imgData, setImgData] = useState("");
   const [baseImage, setbaseImage] = useState("");
   // var subtitle;
   // const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -510,7 +510,7 @@ const EditPost = () => {
                     type="date"
                     name="dateStart"
                     data-date-format="MM-DD-YYY"
-                    className="Post-Input-Fill-Data Post-Input-Medium-Fill-Data"
+                    className="Post-Input-Fill-Data Post-Input-Small-Fill-Data"
                     onChange={handleChange}
                     value={userInfo.dateStart}
                   />
@@ -528,7 +528,7 @@ const EditPost = () => {
                                         value={userInfo.dateStart}
                                     /> */}
                 </div>
-                <h3 className="Post-Calendar-Time">ถึง</h3>
+                <h2 className="Post-Calendar-Time Post-Input">ถึง</h2>
                 <div noValidate className="Post-Calendar">
                   <input
                     type="date"
@@ -585,7 +585,7 @@ const EditPost = () => {
                                     /> */}
                 </div>
 
-                <h3 className="Post-Calendar-Time">ถึง</h3>
+                <h2 className="Post-Calendar-Time Post-Input">ถึง</h2>
                 <div className="Post-Calendar-Time">
                   <input
                     type="time"
@@ -787,7 +787,7 @@ const EditPost = () => {
         {/* </div> */}
       </form>
 
-      <div class="container">
+      <div className="container">
         <div className="Post-Left-Button">
           <button
             name="button"
@@ -799,7 +799,7 @@ const EditPost = () => {
           <button
             type="submit"
             name="button"
-            className="Post-Submit-Button"
+            className="Post-Submit-Button-For-Edit"
             onClick={handleEditShow}
           >
             บันทึก
@@ -877,10 +877,10 @@ const EditPost = () => {
           show={showError}
           onHide={handleErrorClose}
         >
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <div className="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>วันที่จัดกิจกรรมผิด</strong> <br></br>
               วันที่เริ่มต้นจัดกิจกรรมควรถึงก่อนวันสุดท้ายของการจัดกิจกรรม และควรปิดรับสมัครก่อนวันจัดกิจกรรม
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={handleErrorClose}>
+              <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={handleErrorClose}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

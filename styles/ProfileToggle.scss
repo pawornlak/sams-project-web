@@ -17,6 +17,9 @@
   border-style: solid;
   border-width: 1px;
   border-color: #dddddd;
+  @media screen and (max-width: 800px) {
+    margin-top: 80px;
+  }
 }
 
 .Profile-Toggle-Button-Items {
