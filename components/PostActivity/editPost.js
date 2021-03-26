@@ -151,8 +151,8 @@ const EditPost = () => {
   });
 
   const [posterImg, setposterImg] = useState();
-  const [picture, setPicture] = useState(null);
-  const [imgData, setImgData] = useState(null);
+  const [picture, setPicture] = useState("");
+  const [imgData, setImgData] = useState("");
   const [baseImage, setbaseImage] = useState("");
   // var subtitle;
   // const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -880,7 +880,7 @@ const EditPost = () => {
           <div className="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>วันที่จัดกิจกรรมผิด</strong> <br></br>
               วันที่เริ่มต้นจัดกิจกรรมควรถึงก่อนวันสุดท้ายของการจัดกิจกรรม และควรปิดรับสมัครก่อนวันจัดกิจกรรม
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={handleErrorClose}>
+              <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={handleErrorClose}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
